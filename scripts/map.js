@@ -1,6 +1,8 @@
 var graphicsLayer;
 var long;
 var lat;
+var site;
+var gorge;
 var simpleMarkerSymbol;
 var point;
 var daten;
@@ -17,9 +19,6 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
 
 
     ], function(Map, SceneView, GraphicsLayer, Graphic) {
-
-
-
 
         var map = new Map({
             basemap: "hybrid",
@@ -45,9 +44,6 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
 
         map.add(graphicsLayer);
 
-
-
-
         simpleMarkerSymbol = {
             type: "simple-marker",
             color: [226, 119, 40], // orange
@@ -58,17 +54,19 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
             size: 5
 
         };
-        var popupTemplate = {};
-
-
-
+        
+        var popupTemplate = {
+            "title": "hallo",
+            "content": "{Lat} <br> {Long} <br> Diese Site {Site} liegt in der Gorge {Gorge}."
+        };
 
         function getSites() {
             for (var i = 0; i < daten.length; i++) {
 
                 lat = daten[i].Latitude;
                 long = daten[i].Longitude;
-
+                site = daten[i].Site;
+                gorge = daten[i].Gorge;
 
                 point = {
                     type: "point",
@@ -76,9 +74,17 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
                     latitude: lat
                 };
 
+                var attributes = {
+                    Lat: lat,
+                    Long: long,
+                    Site: site,
+                    Gorge: gorge
+                  };
+
                 graphic = new Graphic({
                     geometry: point,
                     symbol: simpleMarkerSymbol,
+                    attributes: attributes,
                     popupTemplate: popupTemplate
                 });
 
