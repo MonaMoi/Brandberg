@@ -7,9 +7,15 @@ var simpleMarkerSymbol;
 var point;
 var daten;
 var graphic;
+var img1;
+var img2;
+var siteIMG1;
+var siteIMG2;
 
-$.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
+$.getJSON('../database/json/TabelleTestIMG.json', function(data) {
     daten = data;
+
+
 
     require([
         "esri/Map",
@@ -109,17 +115,17 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
               // related tables. Similar to text elements, media can only be set within the content.
               type: "media", // MediaContentElement
               mediaInfos: [{
-                title: "<b>Felsmalerei</b>",
+                title: "Felsmalerei",
                 type: "image",
                 caption: "Dies ist ein Bild aus der Gorge {Gorge}",
                 value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/Amis/A10/zz_additional_data/Photo/preview_1600_AAArC-HP0000092-1-PB-77-A10-0-F-9_3.tif.png"
+                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG1}/zz_additional_data/Photo/preview_1600_{IMG1}.png"
                 }
               }, {
-                title: "<b>Indian Laurel Fig</b>",
+                title: "Indian Laurel Fig",
                 caption: "tree species",
                 value: {
-                  sourceURL: "https://selectree.calpoly.edu/images/0600/09/original/ficus-microcarpa-tree-3.jpg"
+                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG2}/zz_additional_data/Photo/preview_1600_{IMG2}.png"
                 }
               }]
             }]
@@ -131,7 +137,14 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
                 lat = daten[i].Latitude;
                 long = daten[i].Longitude;
                 site = daten[i].Site;
+                siteIMG1 = daten[i].SiteIMG1;
+                siteIMG2 = daten[i].SiteIMG2;
                 gorge = daten[i].Gorge;
+                img1 = daten[i].IMG1;
+                img2 = daten[i].IMG2;
+                console.log(gorge);
+                console.log(img2);
+                console.log(siteIMG2);
 
                 point = {
                     type: "point",
@@ -143,7 +156,11 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
                     Lat: lat,
                     Long: long,
                     Site: site,
-                    Gorge: gorge
+                    Gorge: gorge,
+                    IMG1: img1,
+                    IMG2: img2,
+                    SiteIMG1: siteIMG1,
+                    SiteIMG2: siteIMG2
                   };
 
                 graphic = new Graphic({
