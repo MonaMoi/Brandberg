@@ -7,12 +7,10 @@ var simpleMarkerSymbol;
 var point;
 var daten;
 var graphic;
-var img1;
-var img2;
-var siteIMG1;
-var siteIMG2;
+var img1, img2, img3, img4, img5, img6, img7, img8, img9, img10;
+var siteIMG1, siteIMG2, siteIMG3, siteIMG4, siteIMG5, siteIMG6, siteIMG7, siteIMG8, siteIMG9, siteIMG10;
 
-$.getJSON('../database/json/TabelleTestIMG.json', function(data) {
+$.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
     daten = data;
 
 
@@ -23,7 +21,6 @@ $.getJSON('../database/json/TabelleTestIMG.json', function(data) {
         "esri/layers/GraphicsLayer",
         "esri/Graphic",
         "esri/PopupTemplate"
-
 
     ], function(Map, SceneView, GraphicsLayer, Graphic, PopupTemplate) {
 
@@ -49,7 +46,7 @@ $.getJSON('../database/json/TabelleTestIMG.json', function(data) {
 
         graphicsLayer = new GraphicsLayer();
 
-        map.add(graphicsLayer);
+        
 
         simpleMarkerSymbol = {
             type: "simple-marker",
@@ -59,21 +56,15 @@ $.getJSON('../database/json/TabelleTestIMG.json', function(data) {
                 width: 1,
             },
             size: 5
-
         };
         
         
 
-          var PopupTemplate = { // autocasts as new PopupTemplate()
+          var PopupTemplate = {
             title: "Fundstelle {Gorge} ",
   
-            // Set content elements in the order to display.
-            // The first element displayed here is the fieldInfos.
             content: [{
-              // It is also possible to set the fieldInfos outside of the content
-              // directly in the popupTemplate. If no fieldInfos is specifically set
-              // in the content, it defaults to whatever may be set within the popupTemplate.
-              type: "fields", // FieldsContentElement
+              type: "fields",
               fieldInfos: [{
                 fieldName: "Point_Count",
                 visible: false,
@@ -101,18 +92,9 @@ $.getJSON('../database/json/TabelleTestIMG.json', function(data) {
                 label: "Block"
               }]
             }, {
-              // You can also set a descriptive text element. This element
-              // uses an attribute from the featurelayer which displays a
-              // sentence giving the total amount of trees value within a
-              // specified census block. Text elements can only be set within the content.
               type: "text", // TextContentElement
               text: "{Lat} <br> {Long} <br> Diese Site {Site} liegt in der Gorge {Gorge}."
             }, {
-              // You can set a media element within the popup as well. This
-              // can be either an image or a chart. You specify this within
-              // the mediaInfos. The following creates a pie chart in addition
-              // to two separate images. The chart is also set up to work with
-              // related tables. Similar to text elements, media can only be set within the content.
               type: "media", // MediaContentElement
               mediaInfos: [{
                 title: "Felsmalerei",
@@ -122,26 +104,87 @@ $.getJSON('../database/json/TabelleTestIMG.json', function(data) {
                   sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG1}/zz_additional_data/Photo/preview_1600_{IMG1}.png"
                 }
               }, {
-                title: "Indian Laurel Fig",
-                caption: "tree species",
+                title: "Felsmalerei",
+                type: "image",
+                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
                 value: {
                   sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG2}/zz_additional_data/Photo/preview_1600_{IMG2}.png"
                 }
+              }, {
+                title: "Felsmalerei",
+                type: "image",
+                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
+                value: {
+                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG3}/zz_additional_data/Photo/preview_1600_{IMG3}.png"
+                }
+              }, {
+                title: "Felsmalerei",
+                type: "image",
+                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
+                value: {
+                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG4}/zz_additional_data/Photo/preview_1600_{IMG4}.png"
+                }
+              }, {
+                title: "Felsmalerei",
+                type: "image",
+                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
+                value: {
+                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG5}/zz_additional_data/Photo/preview_1600_{IMG5}.png"
+                }
+              }, {
+                title: "Felsmalerei",
+                type: "image",
+                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
+                value: {
+                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG6}/zz_additional_data/Photo/preview_1600_{IMG6}.png"
+                }
+              }, {
+                title: "Felsmalerei",
+                type: "image",
+                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
+                value: {
+                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG7}/zz_additional_data/Photo/preview_1600_{IMG7}.png"
+                }
+              }, {
+                title: "Felsmalerei",
+                type: "image",
+                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
+                value: {
+                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG8}/zz_additional_data/Photo/preview_1600_{IMG8}.png"
+                }
+              }, {
+                title: "Felsmalerei",
+                type: "image",
+                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
+                value: {
+                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG9}/zz_additional_data/Photo/preview_1600_{IMG9}.png"
+                }
+              }, {
+                title: "Felsmalerei",
+                type: "image",
+                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
+                value: {
+                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG10}/zz_additional_data/Photo/preview_1600_{IMG10}.png"
+                }
               }]
             }]
-          }  
+          } 
+          
+          function clearGraphics() {
+
+            graphicsLayer.removeAll();                //Removes all graphics from Layer
+        }  
 
         function getSites() {
+          clearGraphics();
             for (var i = 0; i < daten.length; i++) {
 
                 lat = daten[i].Latitude;
                 long = daten[i].Longitude;
                 site = daten[i].Site;
-                siteIMG1 = daten[i].SiteIMG1;
-                siteIMG2 = daten[i].SiteIMG2;
                 gorge = daten[i].Gorge;
-                img1 = daten[i].IMG1;
-                img2 = daten[i].IMG2;
+                siteIMG1 = daten[i].SiteIMG1, siteIMG2 = daten[i].SiteIMG2, siteIMG3 = daten[i].SiteIMG3, siteIMG4 = daten[i].SiteIMG4, siteIMG5 = daten[i].SiteIMG5, siteIMG6 = daten[i].SiteIMG6, siteIMG7 = daten[i].SiteIMG7, siteIMG8 = daten[i].SiteIMG8, siteIMG9 = daten[i].SiteIMG9, siteIMG10 = daten[i].SiteIMG10;
+                img1 = daten[i].IMG1, img2 = daten[i].IMG2, img3 = daten[i].IMG3, img4 = daten[i].IMG4, img5 = daten[i].IMG5, img6 = daten[i].IMG6, img7 = daten[i].IMG7, img8 = daten[i].IMG8, img9 = daten[i].IMG9, img10 = daten[i].IMG10;
                 console.log(gorge);
                 console.log(img2);
                 console.log(siteIMG2);
@@ -157,10 +200,8 @@ $.getJSON('../database/json/TabelleTestIMG.json', function(data) {
                     Long: long,
                     Site: site,
                     Gorge: gorge,
-                    IMG1: img1,
-                    IMG2: img2,
-                    SiteIMG1: siteIMG1,
-                    SiteIMG2: siteIMG2
+                    IMG1: img1, IMG2: img2, IMG3: img3, IMG4: img4, IMG5: img5, IMG6: img6, IMG7: img7, IMG8: img8, IMG9: img9, IMG10: img10,
+                    SiteIMG1: siteIMG1, SiteIMG2: siteIMG2, SiteIMG3: siteIMG3, SiteIMG4: siteIMG4, SiteIMG5: siteIMG5, SiteIMG6: siteIMG6, SiteIMG7: siteIMG7, SiteIMG8: siteIMG8, SiteIMG9: siteIMG9, SiteIMG10: siteIMG10
                   };
 
                 graphic = new Graphic({
@@ -174,6 +215,123 @@ $.getJSON('../database/json/TabelleTestIMG.json', function(data) {
             }
         }
 
-        getSites();
+
+        function getGorges(a) {
+          clearGraphics();
+
+          switch (a) {
+            case 0:
+              a = "Amis";
+              break;
+            case 1:
+              a = "Circus";
+              break;
+            case 2:
+              a = "Dom";
+              break;
+            case 3:
+              a = "Eros";
+              break;
+            case 4:
+              a = "Furrow";
+              break;
+            case 5:
+              a = "Gaaseb";
+              break;
+            case  7:
+              a = "Hungorob";
+              break;
+            case  8:
+              a = "Karoab";
+              break;
+            case  9:
+              a = "Märchen";
+              break;
+            case  10:
+              a = "Naib";
+              break;
+            case  11:
+              a = "Numas";
+              break;
+            case  12:
+              a = "Nuwuarib";
+              break;
+            case  13:
+              a = "Orabes";
+              break;
+            case  14:
+              a = "Porters";
+              break;
+            case  15:
+              a = "Quagga";
+              break;
+            case  16:
+              a = "Raiders";
+              break;
+            case  17:
+              a = "Tsisab";
+              break;
+            case  17:
+              a = "Hungorob";
+              break;
+            case  18:
+              a = "Uis";
+              break;
+            case  19:
+              a = "Umuab";
+              break;
+        }
+
+          var state = false;
+          for (var i = 0; i < daten.length; i++) {
+            
+            if(a == daten[i].Gorge) {
+              lat = daten[i].Latitude;
+              long = daten[i].Longitude;
+              site = daten[i].Site;
+              gorge = daten[i].Gorge;
+              siteIMG1 = daten[i].SiteIMG1, siteIMG2 = daten[i].SiteIMG2, siteIMG3 = daten[i].SiteIMG3, siteIMG4 = daten[i].SiteIMG4, siteIMG5 = daten[i].SiteIMG5, siteIMG6 = daten[i].SiteIMG6, siteIMG7 = daten[i].SiteIMG7, siteIMG8 = daten[i].SiteIMG8, siteIMG9 = daten[i].SiteIMG9, siteIMG10 = daten[i].SiteIMG10;
+              img1 = daten[i].IMG1, img2 = daten[i].IMG2, img3 = daten[i].IMG3, img4 = daten[i].IMG4, img5 = daten[i].IMG5, img6 = daten[i].IMG6, img7 = daten[i].IMG7, img8 = daten[i].IMG8, img9 = daten[i].IMG9, img10 = daten[i].IMG10;
+              console.log(gorge);
+              console.log(img2);
+              console.log(siteIMG2);
+              state = true;
+            } else if(state == true){
+                break;
+            }
+
+              point = {
+                  type: "point",
+                  longitude: long,
+                  latitude: lat
+              };
+
+              var attributes = {
+                  Lat: lat,
+                  Long: long,
+                  Site: site,
+                  Gorge: gorge,
+                  IMG1: img1, IMG2: img2, IMG3: img3, IMG4: img4, IMG5: img5, IMG6: img6, IMG7: img7, IMG8: img8, IMG9: img9, IMG10: img10,
+                  SiteIMG1: siteIMG1, SiteIMG2: siteIMG2, SiteIMG3: siteIMG3, SiteIMG4: siteIMG4, SiteIMG5: siteIMG5, SiteIMG6: siteIMG6, SiteIMG7: siteIMG7, SiteIMG8: siteIMG8, SiteIMG9: siteIMG9, SiteIMG10: siteIMG10
+                };
+
+              graphic = new Graphic({
+                  geometry: point,
+                  symbol: simpleMarkerSymbol,
+                  attributes: attributes,
+                  popupTemplate: PopupTemplate
+              });
+
+              graphicsLayer.graphics.add(graphic);
+              }      
+            }
+
+        
+
+      map.add(graphicsLayer);
+
+      var a = 10;
+      getGorges(a)
+        //getSites();
     });
 });
