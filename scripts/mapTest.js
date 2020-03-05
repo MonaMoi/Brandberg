@@ -188,7 +188,6 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
 
         function getGorges(a) {
           clearLayer();
-
           switch (a) {
             case 0:
               a = "Amis";
@@ -256,39 +255,42 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
           for (var i = 0; i < daten.length; i++) {
             
             if(a == daten[i].Gorge) {
-              lat = daten[i].Latitude;
-              long = daten[i].Longitude;
-              site = daten[i].Site;
-              gorge = daten[i].Gorge;
-              siteIMG1 = daten[i].SiteIMG1, siteIMG2 = daten[i].SiteIMG2, siteIMG3 = daten[i].SiteIMG3, siteIMG4 = daten[i].SiteIMG4, siteIMG5 = daten[i].SiteIMG5, siteIMG6 = daten[i].SiteIMG6, siteIMG7 = daten[i].SiteIMG7, siteIMG8 = daten[i].SiteIMG8, siteIMG9 = daten[i].SiteIMG9, siteIMG10 = daten[i].SiteIMG10;
-              img1 = daten[i].IMG1, img2 = daten[i].IMG2, img3 = daten[i].IMG3, img4 = daten[i].IMG4, img5 = daten[i].IMG5, img6 = daten[i].IMG6, img7 = daten[i].IMG7, img8 = daten[i].IMG8, img9 = daten[i].IMG9, img10 = daten[i].IMG10;
+              addPoint(i);
               state = true;
             } else if(state == true){
                 break;
             }
-
-              point = {
-                  type: "point",
-                  longitude: long,
-                  latitude: lat
-              };
-
-                  graphic = new Graphic({
-                  geometry: point,
-                  symbol: simpleMarkerSymbol,
-                  attributes: attributes,
-                  popupTemplate: PopupTemplate
-              });
-
-              graphicsLayer.graphics.add(graphic);
               }
                     
         }
-
         
-        map.add(graphicsLayer);
+        function addPoint(i) {
+          lat = daten[i].Latitude;
+          long = daten[i].Longitude;
+          site = daten[i].Site;
+          gorge = daten[i].Gorge;
+          siteIMG1 = daten[i].SiteIMG1, siteIMG2 = daten[i].SiteIMG2, siteIMG3 = daten[i].SiteIMG3, siteIMG4 = daten[i].SiteIMG4, siteIMG5 = daten[i].SiteIMG5, siteIMG6 = daten[i].SiteIMG6, siteIMG7 = daten[i].SiteIMG7, siteIMG8 = daten[i].SiteIMG8, siteIMG9 = daten[i].SiteIMG9, siteIMG10 = daten[i].SiteIMG10;
+          img1 = daten[i].IMG1, img2 = daten[i].IMG2, img3 = daten[i].IMG3, img4 = daten[i].IMG4, img5 = daten[i].IMG5, img6 = daten[i].IMG6, img7 = daten[i].IMG7, img8 = daten[i].IMG8, img9 = daten[i].IMG9, img10 = daten[i].IMG10;
+          
+          point = {
+            type: "point",
+            longitude: long,
+            latitude: lat
+          };
 
-      var a = 10;
+          graphic = new Graphic({
+            geometry: point,
+            symbol: simpleMarkerSymbol,
+            attributes: attributes,
+            popupTemplate: PopupTemplate
+          });
+
+          graphicsLayer.graphics.add(graphic);
+        }
+          
+       map.add(graphicsLayer);
+
+      var a = 1;
       getGorges(a);
       
       

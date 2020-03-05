@@ -1,22 +1,6 @@
-var graphicsLayer;
-var long;
-var lat;
-var site;
-var gorge;
-var year;
-var month;
-var simpleMarkerSymbol;
-var point;
-var daten;
-var graphic;
-var img1, img2, img3, img4, img5, img6, img7, img8, img9, img10;
-var siteIMG1, siteIMG2, siteIMG3, siteIMG4, siteIMG5, siteIMG6, siteIMG7, siteIMG8, siteIMG9, siteIMG10;
-
 $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
-    daten = data;
-
-
-
+    var daten = data;
+  
     require([
         "esri/Map",
         "esri/views/SceneView",
@@ -25,6 +9,8 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
         "esri/PopupTemplate"
 
     ], function(Map, SceneView, GraphicsLayer, Graphic, PopupTemplate) {
+
+        var graphicsLayer = new GraphicsLayer();
 
         var map = new Map({
             basemap: "hybrid",
@@ -46,11 +32,7 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
             }
         });
 
-        graphicsLayer = new GraphicsLayer();
-
-        
-
-        simpleMarkerSymbol = {
+        var simpleMarkerSymbol = {
             type: "simple-marker",
             color: [226, 119, 40], // orange
             outline: {
@@ -60,18 +42,7 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
             size: 5
         };
 
-        var attributes = {
-          Lat: lat,
-          Long: long,
-          Site: site,
-          Gorge: gorge,
-          IMG1: img1, IMG2: img2, IMG3: img3, IMG4: img4, IMG5: img5, IMG6: img6, IMG7: img7, IMG8: img8, IMG9: img9, IMG10: img10,
-          SiteIMG1: siteIMG1, SiteIMG2: siteIMG2, SiteIMG3: siteIMG3, SiteIMG4: siteIMG4, SiteIMG5: siteIMG5, SiteIMG6: siteIMG6, SiteIMG7: siteIMG7, SiteIMG8: siteIMG8, SiteIMG9: siteIMG9, SiteIMG10: siteIMG10
-        };
-        
-        
-
-          var PopupTemplate = {
+        var PopupTemplate = {
             title: "Fundstelle {Gorge} ",
   
             content: [{
@@ -181,7 +152,7 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
             }]
           } 
           
-          function clearLayer() {
+        function clearLayer() {
 
             graphicsLayer.removeAll();
         }  
@@ -190,36 +161,26 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
           clearLayer();
             for (var i = 0; i < daten.length; i++) {
 
-                lat = daten[i].Latitude;
-                long = daten[i].Longitude;
-                site = daten[i].Site;
-                gorge = daten[i].Gorge;
-                siteIMG1 = daten[i].SiteIMG1, siteIMG2 = daten[i].SiteIMG2, siteIMG3 = daten[i].SiteIMG3, siteIMG4 = daten[i].SiteIMG4, siteIMG5 = daten[i].SiteIMG5, siteIMG6 = daten[i].SiteIMG6, siteIMG7 = daten[i].SiteIMG7, siteIMG8 = daten[i].SiteIMG8, siteIMG9 = daten[i].SiteIMG9, siteIMG10 = daten[i].SiteIMG10;
-                img1 = daten[i].IMG1, img2 = daten[i].IMG2, img3 = daten[i].IMG3, img4 = daten[i].IMG4, img5 = daten[i].IMG5, img6 = daten[i].IMG6, img7 = daten[i].IMG7, img8 = daten[i].IMG8, img9 = daten[i].IMG9, img10 = daten[i].IMG10;
-                
-
-                point = {
-                    type: "point",
-                    longitude: long,
-                    latitude: lat
-                };
-
-                graphic = new Graphic({
-                    geometry: point,
-                    symbol: simpleMarkerSymbol,
-                    attributes: attributes,
-                    popupTemplate: PopupTemplate
-                });
-
-                graphicsLayer.graphics.add(graphic);
+                addPoint(i);
             }
-            
         }
 
+        function getSitesByYearMonth (y, m){
+          clearLayer();
+          for (var i = 0; i < daten.length; i++) {
+            var year, month;
+            year = daten[i].Date_of_Discovery, month = daten[i].Date_of_Discovery;
+            year = year.slice(6, 10), month = month.slice(3, 5);
+            year = parseInt(year), month = parseInt(month);
+            
+            if(year < y ||  year <= y && month <= m ){
+              addPoint(i);
+            }
+          }
+        }
 
         function getGorges(a) {
           clearLayer();
-
           switch (a) {
             case 0:
               a = "Amis";
@@ -287,81 +248,55 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
           for (var i = 0; i < daten.length; i++) {
             
             if(a == daten[i].Gorge) {
-              lat = daten[i].Latitude;
-              long = daten[i].Longitude;
-              site = daten[i].Site;
-              gorge = daten[i].Gorge;
-              siteIMG1 = daten[i].SiteIMG1, siteIMG2 = daten[i].SiteIMG2, siteIMG3 = daten[i].SiteIMG3, siteIMG4 = daten[i].SiteIMG4, siteIMG5 = daten[i].SiteIMG5, siteIMG6 = daten[i].SiteIMG6, siteIMG7 = daten[i].SiteIMG7, siteIMG8 = daten[i].SiteIMG8, siteIMG9 = daten[i].SiteIMG9, siteIMG10 = daten[i].SiteIMG10;
-              img1 = daten[i].IMG1, img2 = daten[i].IMG2, img3 = daten[i].IMG3, img4 = daten[i].IMG4, img5 = daten[i].IMG5, img6 = daten[i].IMG6, img7 = daten[i].IMG7, img8 = daten[i].IMG8, img9 = daten[i].IMG9, img10 = daten[i].IMG10;
+              addPoint(i);
               state = true;
             } else if(state == true){
                 break;
             }
-
-              point = {
-                  type: "point",
-                  longitude: long,
-                  latitude: lat
-              };
-
-               var graphic = new Graphic({
-                  geometry: point,
-                  symbol: simpleMarkerSymbol,
-                  attributes: attributes,
-                  popupTemplate: PopupTemplate
-              });
-
-              graphicsLayer.graphics.add(graphic);
               }
                     
         }
 
-        function getSitesByYearMonth (y, m){
-          clearLayer();
-          for (var i = 0; i < daten.length; i++) {
-            year = daten[i].Date_of_Discovery, month = daten[i].Date_of_Discovery;
-            year = year.slice(6, 10), month = month.slice(3, 5);
-            year = parseInt(year), month = parseInt(month);
-            
-          if(year < y ||  year <= y && month <= m ){
+        function addPoint(i) {
+          var lat = daten[i].Latitude;
+          var long = daten[i].Longitude;
+          var site = daten[i].Site;
+          var gorge = daten[i].Gorge;
+          var siteIMG1 = daten[i].SiteIMG1, siteIMG2 = daten[i].SiteIMG2, siteIMG3 = daten[i].SiteIMG3, siteIMG4 = daten[i].SiteIMG4, siteIMG5 = daten[i].SiteIMG5, siteIMG6 = daten[i].SiteIMG6, siteIMG7 = daten[i].SiteIMG7, siteIMG8 = daten[i].SiteIMG8, siteIMG9 = daten[i].SiteIMG9, siteIMG10 = daten[i].SiteIMG10;
+          var img1 = daten[i].IMG1, img2 = daten[i].IMG2, img3 = daten[i].IMG3, img4 = daten[i].IMG4, img5 = daten[i].IMG5, img6 = daten[i].IMG6, img7 = daten[i].IMG7, img8 = daten[i].IMG8, img9 = daten[i].IMG9, img10 = daten[i].IMG10;
+          
+          var attributes = {
+            Lat: lat,
+            Long: long,
+            Site: site,
+            Gorge: gorge,
+            IMG1: img1, IMG2: img2, IMG3: img3, IMG4: img4, IMG5: img5, IMG6: img6, IMG7: img7, IMG8: img8, IMG9: img9, IMG10: img10,
+            SiteIMG1: siteIMG1, SiteIMG2: siteIMG2, SiteIMG3: siteIMG3, SiteIMG4: siteIMG4, SiteIMG5: siteIMG5, SiteIMG6: siteIMG6, SiteIMG7: siteIMG7, SiteIMG8: siteIMG8, SiteIMG9: siteIMG9, SiteIMG10: siteIMG10
+          };
 
-              lat = daten[i].Latitude;
-              long = daten[i].Longitude;
-              site = daten[i].Site;
-              gorge = daten[i].Gorge;
-              siteIMG1 = daten[i].SiteIMG1, siteIMG2 = daten[i].SiteIMG2, siteIMG3 = daten[i].SiteIMG3, siteIMG4 = daten[i].SiteIMG4, siteIMG5 = daten[i].SiteIMG5, siteIMG6 = daten[i].SiteIMG6, siteIMG7 = daten[i].SiteIMG7, siteIMG8 = daten[i].SiteIMG8, siteIMG9 = daten[i].SiteIMG9, siteIMG10 = daten[i].SiteIMG10;
-              img1 = daten[i].IMG1, img2 = daten[i].IMG2, img3 = daten[i].IMG3, img4 = daten[i].IMG4, img5 = daten[i].IMG5, img6 = daten[i].IMG6, img7 = daten[i].IMG7, img8 = daten[i].IMG8, img9 = daten[i].IMG9, img10 = daten[i].IMG10;
-            }
+          var point = {
+            type: "point",
+            longitude: long,
+            latitude: lat
+          };
 
-              point = {
-                  type: "point",
-                  longitude: long,
-                  latitude: lat
-              };
+          var graphic = new Graphic({
+            geometry: point,
+            symbol: simpleMarkerSymbol,
+            attributes: attributes,
+            popupTemplate: PopupTemplate
+          });
 
-              graphic = new Graphic({
-                  geometry: point,
-                  symbol: simpleMarkerSymbol,
-                  attributes: attributes,
-                  popupTemplate: PopupTemplate
-              });
-
-              graphicsLayer.graphics.add(graphic);
-              }
-              
+          graphicsLayer.graphics.add(graphic);
         }
-        map.add(graphicsLayer);
-
-
-        
-
       
-
-      var a = 10;
+      map.add(graphicsLayer);
+      
+      var a = 1;
       var y = 1979;
       var m = 03;
-      //getGorges(a)
-      getSites();
-      //getSitesByYearMonth (y, m)
+      getGorges(a);
+      //getSites();
+      //getSitesByYearMonth (y, m);
     });
 });
