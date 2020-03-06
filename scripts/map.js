@@ -292,11 +292,46 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
       
       map.add(graphicsLayer);
       
-      var a = 1;
-      var y = 1979;
+      var a = 10;
+      var y = 1980;
       var m = 03;
-      getGorges(a);
+      //getGorges(a);
       //getSites();
-      //getSitesByYearMonth (y, m);
+      getSitesByYearMonth (y, m);
     });
 });
+
+
+
+
+
+/*
+*
+*
+*
+  ToDoooo
+  HTML
+    Layout
+    Dropdown
+    Map einbindung
+    Startseite Inhalte
+    Galerie Inhalte
+
+  MAP
+    Animation
+    Layer Interaktion
+      implementieren
+
+      Gorges farbig
+      timebar farbig (Discoverer)
+      Balken
+
+      getAllSites() - search for Site
+
+
+
+    PopUp gestalten - Inhalte
+*
+*
+*
+ */
