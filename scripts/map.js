@@ -159,105 +159,212 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
 
         function getSites() {
           clearLayer();
+          var coulor = [];
             for (var i = 0; i < daten.length; i++) {
+              var discoverer = daten[i].Discoverer;
+              discoverer = discoverer.toLowerCase();
+              discoverer = discoverer.replace(/ /g, '');
+              discoverer = discoverer.replace('/', '');
+              discoverer = discoverer.replace('&', '');
+              
+              
+              switch(discoverer) {
+                case "toiwoshipahu":
+                  coulor = [0, 255, 0]; //green
+                  break;
+                case "toiwo" || "j.toiwo":
+                  coulor = [0, 0, 255]; //blue
+                  break;
+                case "toiwolameka":
+                  coulor = [];
+                  break;
+                case "shipahu":
+                  coulor = [255, 255, 0]; // yellow
+                  break;
+                case "shipahupaulus":
+                  coulor = [];
+                  break;
+                case "shipahupager":
+                  coulor = [];
+                  break;
+                case "s.a.pager":
+                  coulor = [226, 119, 40]; // orange
+                  break;
+                case "pagermatheus":
+                  coulor = [];
+                  break;
+                case "matheus" || "e.matheus":
+                  coulor = [];
+                  break; 
+                case "camby" || "camby´srock":
+                  coulor = [];
+                  break;
+                case "roth" || "h.roth":
+                  coulor = [];
+                  break;
+                case "lempproth":
+                  coulor = [];
+                  break;
+                case "lempp" || "h.lempp":
+                  coulor = [];
+                  break;
+                case "viereck" || "a.viereck":
+                  coulor = [];
+                  break;
+                case "paulus" || "f.paulus":
+                  coulor = [];
+                  break;
+                case "clauss" || "clauss-darrer":
+                  coulor = [];
+                  break;
+                case "walter" || "j.j.d.walter":
+                  coulor = [];
+                  break;
+                case "rudner" || "j.rudner":
+                  coulor = [];
+                  break;
+                case "craven" || "dr.craven" || "dr.d.craven":
+                  coulor = [];
+                  break;
+                case "jipsen":
+                  coulor = [];
+                  break;
+                case "keyenstüber" || "kleyenstüber":
+                  coulor = [];
+                  break;
+                case "nashilengo" || "j.nashilongo" || "nashilongo" || "nshilongo":
+                  coulor = [];
+                  break;
+                case "kambonde":
+                  coulor = [];
+                  break;
+                case "scherze":
+                  coulor = [];
+                  break;                                     
+                default:
+                break;
+              }
 
-                addPoint(i);
+              addPoint(i, coulor);
             }
         }
 
         function getSitesByYearMonth (y, m){
           clearLayer();
+          var coulor = [226, 119, 40];
           for (var i = 0; i < daten.length; i++) {
-            var year, month;
+            var year, month, discoverer;
             year = daten[i].Date_of_Discovery, month = daten[i].Date_of_Discovery;
             year = year.slice(6, 10), month = month.slice(3, 5);
             year = parseInt(year), month = parseInt(month);
+
+            discoverer = daten[i].Discoverer;
+            console.log(discoverer);
             
             if(year < y ||  year <= y && month <= m ){
-              addPoint(i);
+              addPoint(i, coulor);
             }
           }
         }
 
         function getGorges(a) {
-          clearLayer();
+          var coulor;
           switch (a) {
             case 0:
               a = "Amis";
+              coulor = [226, 119, 40];
               break;
             case 1:
               a = "Circus";
+              coulor = [255, 204, 0];
               break;
             case 2:
               a = "Dom";
+              coulor = [204, 255, 51];
               break;
             case 3:
               a = "Eros";
+              coulor = [102, 255, 51];
               break;
             case 4:
               a = "Furrow";
+              coulor = [0, 204, 102];
               break;
             case 5:
-              a = "Gaaseb";
+              a = "Ga'aseb";
+              coulor = [0, 153, 153];
+              break;
+            case  6:
+              a = "Hungorob";
+              coulor = [195, 100, 40];
               break;
             case  7:
-              a = "Hungorob";
+              a = "Karoab";
+              coulor = [240, 100, 50];
               break;
             case  8:
-              a = "Karoab";
+              a = "Märchen";
+              coulor = [102, 0, 255];
               break;
             case  9:
-              a = "Märchen";
+              a = "Naib";
+              coulor = [204, 0, 255];
               break;
             case  10:
-              a = "Naib";
+              a = "Numas";
+              coulor = [153, 51, 153];
               break;
             case  11:
-              a = "Numas";
+              a = "Nuwuarib"; //?????
+              coulor = [255, 51, 153];
               break;
             case  12:
-              a = "Nuwuarib";
+              a = "Orabes";
+              coulor = [255, 0, 0];
               break;
             case  13:
-              a = "Orabes";
+              a = "Porters";
+              coulor = [102, 153, 255];
               break;
             case  14:
-              a = "Porters";
+              a = "Quagga";
+              coulor = [204, 102, 255];
               break;
             case  15:
-              a = "Quagga";
+              a = "Raiders";
+              coulor = [0, 255, 153];
               break;
             case  16:
-              a = "Raiders";
-              break;
-            case  17:
-              a = "Tsisab";
+              a = "Tsisab"; //?????
+              coulor = [0, 255, 255];
               break;
             case  17:
               a = "Hungorob";
+              coulor = [153, 0, 153];
               break;
             case  18:
-              a = "Uis";
+              a = "Uis"; //???
+              coulor = [51, 153, 102];
               break;
             case  19:
               a = "Umuab";
+              coulor = [204, 102, 255];
               break;
           }
-
+          
           let state = false;
           for (var i = 0; i < daten.length; i++) {
             
             if(a == daten[i].Gorge) {
-              addPoint(i);
+              addPoint(i, coulor);
               state = true;
             } else if(state == true){
                 break;
             }
-              }
-                    
+          }
         }
 
-        function addPoint(i) {
+        function addPoint(i, coulor) {
           var lat = daten[i].Latitude;
           var long = daten[i].Longitude;
           var site = daten[i].Site;
@@ -272,6 +379,16 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
             Gorge: gorge,
             IMG1: img1, IMG2: img2, IMG3: img3, IMG4: img4, IMG5: img5, IMG6: img6, IMG7: img7, IMG8: img8, IMG9: img9, IMG10: img10,
             SiteIMG1: siteIMG1, SiteIMG2: siteIMG2, SiteIMG3: siteIMG3, SiteIMG4: siteIMG4, SiteIMG5: siteIMG5, SiteIMG6: siteIMG6, SiteIMG7: siteIMG7, SiteIMG8: siteIMG8, SiteIMG9: siteIMG9, SiteIMG10: siteIMG10
+          };
+          
+          var simpleMarkerSymbol = {
+            type: "simple-marker",
+            color: coulor,
+            outline: {
+                color: [255, 255, 255], // white
+                width: 1,
+            },
+            size: 5
           };
 
           var point = {
@@ -292,12 +409,12 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
       
       map.add(graphicsLayer);
       
-      var a = 10;
+      var a = 5;
       var y = 1980;
       var m = 03;
-      //getGorges(a);
+      getGorges(a);
       //getSites();
-      getSitesByYearMonth (y, m);
+      //getSitesByYearMonth (y, m);
     });
 });
 
@@ -335,3 +452,95 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
 *
 *
  */
+
+/*
+
+1"Toiwo & Shipahu"
+
+"Toiwo/ Shipahu"
+
+"Toiwo/Shipahu"
+
+2"Toiwo"
+
+"J. Toiwo"
+
+3"Toiwo/ Lameka"
+
+4"Shipahu"
+
+5"Shipahu/Paulus"
+
+6"Shipahu/Pager"
+
+7"S.A. Pager"
+
+8"Pager/Matheus"
+
+9"Matheus"
+
+"E.Matheus"
+
+10"Camby´s Rock"
+​
+"Camby"
+
+11"Roth"
+
+"H. Roth"
+
+12"Lempp/ Roth"
+
+13"Lempp"
+
+"H. Lempp"
+
+14"Viereck"
+​
+"A. Viereck"
+
+15"Paulus"
+
+"F.Paulus"
+
+"F. Paulus"
+
+16"Clauss"
+
+"Clauss- Darrer"
+
+"Clauss-Darrer"
+
+17"Walter"
+
+"J.J.D.Walter"
+
+18"Rudner"
+
+"J. Rudner"
+
+19"Craven"
+
+"Dr. Craven"
+
+"Dr. D. Craven"
+​
+20"Jipsen"
+​​​
+21"Keyenstüber"
+
+"Kleyenstüber"
+​
+22"Nashilengo"
+
+"J. Nashilongo"
+
+"Nashilongo"
+​
+"Nshilongo"
+​​​
+23"Kambonde"
+
+24"Scherz"
+
+*/
