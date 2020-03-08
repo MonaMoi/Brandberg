@@ -150,7 +150,7 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
                 }
               }]
             }]
-          } 
+          }
           
         function clearLayer() {
 
@@ -163,6 +163,7 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
           for (var i = 0; i < daten.length; i++) {
               addPoint(i);
             }
+            addPolygon();
         }
 
         function addPoint(i) {
@@ -207,6 +208,51 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
 
           graphicsLayer.graphics.add(graphic);
         }
+
+        function addPolygon(){
+            var polygon = {
+                type: "polygon", 
+                rings: [
+                  [14.567988, -21.026032],
+                  [14.569655, -21.037139],
+                  [14.575130, -21.070168],
+                  [14.574289, -21.080009],
+                  [14.569478, -21.089399],     
+                  [14.578734, -21.103087],
+                  [14.555399, -21.115577],
+                  [14.572675, -21.126702],
+                  [14.589679, -21.188398],
+                  [14.601220, -21.177878],
+                  [14.657098, -21.143921],
+                  [14.675094, -21.117051],
+                  [14.686745, -21.104411],
+                  [14.671904, -21.068789],
+                  [14.639504, -21.042081],
+                  [14.602096, -21.035809],
+                  [14.567988, -21.026032]
+                ]
+              };
+
+              
+
+
+
+            var fillSymbol = {
+            type: "simple-fill",
+            color: [227, 139, 79, 0.8],
+            outline: {
+                color: [255, 255, 255],
+                width: 1
+            }
+            };
+    
+            var polygonGraphic = new Graphic({
+            geometry: polygon,
+            symbol: fillSymbol
+            });
+
+            graphicsLayer.graphics.add(polygonGraphic);
+        }  
 
         /*
         //Die folgenden 25 Zeilen händeln die Funktionen der GorgesMap (checkboxes).
