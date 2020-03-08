@@ -11,6 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://js.arcgis.com/4.14/"></script>
 
     <title>Brandberg rock art</title>
   
@@ -23,10 +24,19 @@
               height: 100%;
               width: 100%;
             }
+
+            #layerToggle {
+              top: 430px;
+              right: 20px;
+              position: absolute;
+              z-index: 99;
+              background-color: white;
+              border-radius: 8px;
+              padding: 10px;
+              opacity: 0.75;
+            }
           </style>
-        <div class="jumbotron text-center" style="margin-bottom:0">
-            <h1>Die Felsmalereien im Brandberg</h1>
-          </div>
+        
           <nav class="navbar navbar-expand-md bg-dark navbar-dark">
            
             <div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
@@ -45,8 +55,25 @@
           </nav>
 
       <div id="viewDiv"></div>
+      <span id="layerToggle" class="esri-widget">
+        <input class="box" type="checkbox" id="0" /> Amis <br>
+        <input class="box" type="checkbox" id="1" /> Circus <br>
+        <input class="box" type="checkbox" id="2" /> Dom <br>
+        <input class="box" type="checkbox" id="3" /> Eros <br>
+        <input class="box" type="checkbox" id="4" /> Furrow <br>
+        <input class="box" type="checkbox" id="5" /> Ga'aseb <br>
+        <input class="box" type="checkbox" id="6" /> Hungorob <br>
+        <input class="box" type="checkbox" id="7" /> Karoab <br>
+        <input class="box" type="checkbox" id="8" /> Märchen <br>
+        <input class="box" type="checkbox" id="9" /> Numas <br>
+        <input class="box" type="checkbox" id="10" /> Naib <br>
+        <input class="box" type="checkbox" id="11" /> Orabes <br>
+        <input class="box" type="checkbox" id="12" /> Porters <br>
+        <input class="box" type="checkbox" id="13" /> Quagga <br>
+        <input class="box" type="checkbox" id="14" /> Raiders <br>
+        <input class="box" type="checkbox" id="15" /> Umuab <br>
+      </span>
     </body>
-    <script src="https://js.arcgis.com/4.14/"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="../scripts/map.js"></script>
 </html>

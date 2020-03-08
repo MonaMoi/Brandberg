@@ -1,6 +1,6 @@
 $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
     var daten = data;
-  
+    
     require([
         "esri/Map",
         "esri/views/SceneView",
@@ -159,6 +159,7 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
 
         function getSites() {
           clearLayer();
+          
           var coulor = [];
             for (var i = 0; i < daten.length; i++) {
               var discoverer = daten[i].Discoverer;
@@ -315,38 +316,22 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
               coulor = [153, 51, 153];
               break;
             case  11:
-              a = "Nuwuarib"; //?????
-              coulor = [255, 51, 153];
-              break;
-            case  12:
               a = "Orabes";
               coulor = [255, 0, 0];
               break;
-            case  13:
+            case  12:
               a = "Porters";
               coulor = [102, 153, 255];
               break;
-            case  14:
+            case  13:
               a = "Quagga";
               coulor = [204, 102, 255];
               break;
-            case  15:
+            case  14:
               a = "Raiders";
               coulor = [0, 255, 153];
               break;
-            case  16:
-              a = "Tsisab"; //?????
-              coulor = [0, 255, 255];
-              break;
-            case  17:
-              a = "Hungorob";
-              coulor = [153, 0, 153];
-              break;
-            case  18:
-              a = "Uis"; //???
-              coulor = [51, 153, 102];
-              break;
-            case  19:
+            case  15:
               a = "Umuab";
               coulor = [204, 102, 255];
               break;
@@ -406,13 +391,38 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
 
           graphicsLayer.graphics.add(graphic);
         }
-      
+
+        //Die folgenden 25 Zeilen händeln die Funktionen der GorgesMap (checkboxes).
+        var getGorgesLayerToggle = document.getElementsByClassName("box");
+        
+        for(let i = 0; i < getGorgesLayerToggle.length; i++)
+        {
+          getGorgesLayerToggle[i].checked = false;
+        }
+
+        for(let i=0; i < getGorgesLayerToggle.length; i++)
+        {
+          var gorgeID = document.getElementById(i);
+          gorgeID.addEventListener("change", function() {
+            if(getGorgesLayerToggle[i].checked){
+              b = false;
+              getGorges(i);
+            } else{
+              clearLayer();
+              for(let j = 0; j < getGorgesLayerToggle.length; j++){
+                gorgeID = document.getElementById(j);
+                if(gorgeID.checked){
+                  getGorges(j);
+                }
+              }
+            }
+          });
+        }
+          
       map.add(graphicsLayer);
       
-      var a = 5;
       var y = 1980;
       var m = 03;
-      getGorges(a);
       //getSites();
       //getSitesByYearMonth (y, m);
     });

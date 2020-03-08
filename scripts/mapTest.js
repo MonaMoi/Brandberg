@@ -207,46 +207,43 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
             case 5:
               a = "Gaaseb";
               break;
-            case  7:
+            case  6:
               a = "Hungorob";
               break;
-            case  8:
+            case  7:
               a = "Karoab";
               break;
-            case  9:
+            case  8:
               a = "Märchen";
               break;
-            case  10:
+            case  9:
               a = "Naib";
               break;
-            case  11:
+            case  10:
               a = "Numas";
               break;
-            case  12:
+            case  11:
               a = "Nuwuarib";
               break;
-            case  13:
+            case  12:
               a = "Orabes";
               break;
-            case  14:
+            case  13:
               a = "Porters";
               break;
-            case  15:
+            case  14:
               a = "Quagga";
               break;
-            case  16:
+            case  15:
               a = "Raiders";
               break;
-            case  17:
+            case  16:
               a = "Tsisab";
               break;
             case  17:
-              a = "Hungorob";
+              a = "Uis"; //
               break;
             case  18:
-              a = "Uis";
-              break;
-            case  19:
               a = "Umuab";
               break;
           }
@@ -262,6 +259,30 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
             }
               }
                     
+        }
+        
+        function removePoint(i) {
+          lat = daten[i].Latitude;
+          long = daten[i].Longitude;
+          site = daten[i].Site;
+          gorge = daten[i].Gorge;
+          siteIMG1 = daten[i].SiteIMG1, siteIMG2 = daten[i].SiteIMG2, siteIMG3 = daten[i].SiteIMG3, siteIMG4 = daten[i].SiteIMG4, siteIMG5 = daten[i].SiteIMG5, siteIMG6 = daten[i].SiteIMG6, siteIMG7 = daten[i].SiteIMG7, siteIMG8 = daten[i].SiteIMG8, siteIMG9 = daten[i].SiteIMG9, siteIMG10 = daten[i].SiteIMG10;
+          img1 = daten[i].IMG1, img2 = daten[i].IMG2, img3 = daten[i].IMG3, img4 = daten[i].IMG4, img5 = daten[i].IMG5, img6 = daten[i].IMG6, img7 = daten[i].IMG7, img8 = daten[i].IMG8, img9 = daten[i].IMG9, img10 = daten[i].IMG10;
+          
+          point = {
+            type: "point",
+            longitude: long,
+            latitude: lat
+          };
+
+          graphic = new Graphic({
+            geometry: point,
+            symbol: simpleMarkerSymbol,
+            attributes: attributes,
+            popupTemplate: PopupTemplate
+          });
+
+          graphicsLayer.graphics.remove(graphic);
         }
         
         function addPoint(i) {
@@ -287,11 +308,14 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
 
           graphicsLayer.graphics.add(graphic);
         }
+
+        
           
        map.add(graphicsLayer);
 
       var a = 1;
       getGorges(a);
+      
       
       
     });
