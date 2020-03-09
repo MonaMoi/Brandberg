@@ -273,67 +273,67 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
           switch (a) {
             case 0:
               a = "Amis";
-              coulor = [226, 119, 40];
+              coulor = [255, 215, 0]; // gelb
               break;
             case 1:
               a = "Circus";
-              coulor = [255, 204, 0];
+              coulor = [255, 0, 0]; // rot
               break;
             case 2:
               a = "Dom";
-              coulor = [204, 255, 51];
+              coulor = [0, 153, 153]; // türkis
               break;
             case 3:
               a = "Eros";
-              coulor = [102, 255, 51];
+              coulor = [255, 165, 0]; // orange
               break;
             case 4:
               a = "Furrow";
-              coulor = [0, 204, 102];
+              coulor = [255, 0, 255]; // pink
               break;
             case 5:
               a = "Ga'aseb";
-              coulor = [0, 153, 153];
+              coulor = [0, 0, 255]; // blau
               break;
             case  6:
               a = "Hungorob";
-              coulor = [195, 100, 40];
+              coulor = [128, 128, 128]; // hellgrau
               break;
             case  7:
               a = "Karoab";
-              coulor = [240, 100, 50];
+              coulor = [0, 191, 255]; // hellblau
               break;
             case  8:
               a = "Märchen";
-              coulor = [102, 0, 255];
+              coulor = [0, 0, 0]; // schwarz
               break;
             case  9:
               a = "Naib";
-              coulor = [204, 0, 255];
+              coulor = [184, 134, 11]; // gold
               break;
             case  10:
               a = "Numas";
-              coulor = [153, 51, 153];
+              coulor = [153, 51, 153]; // violet
               break;
             case  11:
               a = "Orabes";
-              coulor = [255, 0, 0];
+              coulor = [0, 128, 0]; // grün
               break;
             case  12:
               a = "Porters";
-              coulor = [102, 153, 255];
+              coulor = [139, 0, 0]; // dunkelrot
               break;
             case  13:
               a = "Quagga";
-              coulor = [204, 102, 255];
+              coulor = [255, 255, 255]; // weiß
               break;
             case  14:
               a = "Raiders";
-              coulor = [0, 255, 153];
+              coulor = [102, 255, 51]; // knallgrün
               break;
             case  15:
               a = "Umuab";
-              coulor = [204, 102, 255];
+              coulor = [238, 130, 238]; // rosa
               break;
           }
           
