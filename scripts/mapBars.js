@@ -1,4 +1,4 @@
-$.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data) {
+$.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
     var daten = data;
     
     require([
@@ -20,9 +20,19 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
         var view = new SceneView({
             container: "viewDiv",
             map: map,
-            center: [14.5586, -21.12681],
-            zoom: 11,
-
+            
+            camera: {
+                // autocasts as new Camera()
+                position: {
+                  // autocasts as new Point()
+                  x:  14.547518,
+                  y: -21.367804,   
+                  z: 9000.7049653716385
+                },
+                heading: 0.34445102566290225,
+                tilt: 70.95536300536367
+              },
+            
             popup: {
                 dockEnabled: true,
                 dockOptions: {
@@ -151,108 +161,106 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
               }]
             }]
           }
-          
-        function clearLayer() {
-
-            graphicsLayer.removeAll();
+         
+        function getSitesNumberofGorge(){
+            var numberofSitesinGorge = 0;
+            var temp = daten[0].Gorge;
+            var NumberInPercent;
+            for (var i = 0; i < daten.length; i++) {
+                if(daten[i].Gorge == temp){
+                    temp = daten[i].Gorge;
+                    numberofSitesinGorge = numberofSitesinGorge + 1;
+                }else{
+                    console.log(numberofSitesinGorge);
+                    NumberInPercent = (839 / 100) * numberofSitesinGorge;
+                    getGorgeBars(NumberInPercent, temp);
+                    temp = daten[i].Gorge;
+                    numberofSitesinGorge = 1;
+                }
+            }
         }  
 
-        function getSites() {
-          clearLayer();
+        function getGorgeBars(NumberInPercent, temp) {
+          //clearLayer();
+          //console.log(temp);
+          var numOfSites = NumberInPercent * 10;
+          //console.log(numOfSites);
+          var gorgeBarsCoordinates = [
+            14.483873, -21.177530, numOfSites, "Amis",
+            14.470143, -21.120104, numOfSites, "Circus",
+            14.458018, -21.169877, numOfSites, "Dom",
+            14.589272, -21.215102, numOfSites, "Eros",
+            14.551528, -21.210224, numOfSites, "Furrow",
+            14.573625, -21.210378, numOfSites, "Ga'aseb",
+            14.543473, -21.187160, numOfSites, "Hungorob",
+            14.518668, -21.079570, numOfSites, "Karoab",
+            14.499378, -21.068345, numOfSites, "Märchen",
+            14.507687, -21.106128, numOfSites, "Naib",
+            14.523142, -21.140443, numOfSites, "Numas",
+            14.603448, -21.188027, numOfSites, "Orabes",
+            14.488744, -21.072506, numOfSites, "Porters",
+            14.591888, -21.204358, numOfSites, "Quagga",
+            14.477188, -21.072382, numOfSites, "Raiders",
+            14.562196, -21.079732, numOfSites, "Umab",
+          ];
           
-          for (var i = 0; i < daten.length; i++) {
-              addPoint(i);
+          for(var i = 0; i < gorgeBarsCoordinates.length; i++){
+            if(temp == gorgeBarsCoordinates[i+3]){  
+                addBar(i, gorgeBarsCoordinates, numOfSites);
             }
-            addPolygon();
+          }
+            
         }
 
-        function addPoint(i) {
-          var lat = daten[i].Latitude;
-          var long = daten[i].Longitude;
-          var site = daten[i].Site;
-          var gorge = daten[i].Gorge;
-          var siteIMG1 = daten[i].SiteIMG1, siteIMG2 = daten[i].SiteIMG2, siteIMG3 = daten[i].SiteIMG3, siteIMG4 = daten[i].SiteIMG4, siteIMG5 = daten[i].SiteIMG5, siteIMG6 = daten[i].SiteIMG6, siteIMG7 = daten[i].SiteIMG7, siteIMG8 = daten[i].SiteIMG8, siteIMG9 = daten[i].SiteIMG9, siteIMG10 = daten[i].SiteIMG10;
-          var img1 = daten[i].Picture_Link_to_gorge1, img2 = daten[i].Picture_Link_to_gorge2, img3 = daten[i].Picture_Link_to_gorge3, img4 = daten[i].Picture_Link_to_gorge4, img5 = daten[i].Picture_Link_to_gorge5, img6 = daten[i].Picture_Link_to_gorge6, img7 = daten[i].Picture_Link_to_gorge7, img8 = daten[i].Picture_Link_to_gorge8, img9 = daten[i].Picture_Link_to_gorge9, img10 = daten[i].Picture_Link_to_gorge10;
-          
-        var attributes = {
-            Lat: lat,
-            Long: long,
-            Site: site,
-            Gorge: gorge,
-            IMG1: img1, IMG2: img2, IMG3: img3, IMG4: img4, IMG5: img5, IMG6: img6, IMG7: img7, IMG8: img8, IMG9: img9, IMG10: img10,
-            SiteIMG1: siteIMG1, SiteIMG2: siteIMG2, SiteIMG3: siteIMG3, SiteIMG4: siteIMG4, SiteIMG5: siteIMG5, SiteIMG6: siteIMG6, SiteIMG7: siteIMG7, SiteIMG8: siteIMG8, SiteIMG9: siteIMG9, SiteIMG10: siteIMG10
-          };
-          
-          var simpleMarkerSymbol = {
-            type: "simple-marker",
-            color: [226, 119, 40],
-            outline: {
-                color: [255, 255, 255], // white
-                width: 1,
-            },
-            size: 5
-          };
-
-          var point = {
-            type: "point",
-            longitude: long,
-            latitude: lat
-          };
-
-          var graphic = new Graphic({
-            geometry: point,
-            symbol: simpleMarkerSymbol,
-            attributes: attributes,
-            popupTemplate: PopupTemplate
-          });
-
-          graphicsLayer.graphics.add(graphic);
-        }
-
-        function addPolygon(){
-            var polygon = {
-                type: "polygon", 
-                rings: [
-                  [14.567988, -21.026032],
-                  [14.569655, -21.037139],
-                  [14.575130, -21.070168],
-                  [14.574289, -21.080009],
-                  [14.569478, -21.089399],     
-                  [14.578734, -21.103087],
-                  [14.555399, -21.115577],
-                  [14.572675, -21.126702],
-                  [14.589679, -21.188398],
-                  [14.601220, -21.177878],
-                  [14.657098, -21.143921],
-                  [14.675094, -21.117051],
-                  [14.686745, -21.104411],
-                  [14.671904, -21.068789],
-                  [14.639504, -21.042081],
-                  [14.602096, -21.035809],
-                  [14.567988, -21.026032]
+        function addBar(i, gorgeBarsCoordinates, numOfSites){
+            var polyline = {
+                type: "polyline", // autocasts as new Polyline()
+                paths: [
+                    [gorgeBarsCoordinates[i], gorgeBarsCoordinates[i+1], 0],
+                    [gorgeBarsCoordinates[i], gorgeBarsCoordinates[i+1], numOfSites]
                 ]
               };
+      
+              lineSymbol = {
+                type: "simple-line", // autocasts as SimpleLineSymbol()
+                color: [226, 119, 40],
+                width: 4
+              };
+      
+              var polylineGraphic = new Graphic({
+                geometry: polyline,
+                symbol: lineSymbol
+              });
+      
+            
+            graphicsLayer.graphics.add(polylineGraphic);
 
-              
+            var point = {
+                type: "point", // autocasts as new Point()
+                x: gorgeBarsCoordinates[i], 
+                y: gorgeBarsCoordinates[i+1],
+                z: numOfSites + 10
+              };
+      
+              markerSymbol = {
+                type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+                color: [226, 119, 40],
+                outline: {
+                  // autocasts as new SimpleLineSymbol()
+                  color: [255, 255, 255],
+                  width: 2
+                }
+              };
+      
+              var pointGraphic = new Graphic({
+                geometry: point,
+                symbol: markerSymbol
+              });
 
-
-
-            var fillSymbol = {
-            type: "simple-fill",
-            color: [227, 139, 79, 0.8],
-            outline: {
-                color: [255, 255, 255],
-                width: 1
-            }
-            };
-    
-            var polygonGraphic = new Graphic({
-            geometry: polygon,
-            symbol: fillSymbol
-            });
-
-            graphicsLayer.graphics.add(polygonGraphic);
+              graphicsLayer.graphics.add(pointGraphic);
         }  
+
+          
 
         /*
         //Die folgenden 25 Zeilen händeln die Funktionen der GorgesMap (checkboxes).
@@ -284,9 +292,8 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
         */
           
       map.add(graphicsLayer);
-      
+      getSitesNumberofGorge()
     
-      getSites();
       
     });
 });

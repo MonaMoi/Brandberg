@@ -1,14 +1,15 @@
-$.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data) {
+ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
     var daten = data;
     
     require([
         "esri/Map",
         "esri/views/SceneView",
+        "esri/widgets/TimeSlider",
         "esri/layers/GraphicsLayer",
         "esri/Graphic",
         "esri/PopupTemplate"
 
-    ], function(Map, SceneView, GraphicsLayer, Graphic, PopupTemplate) {
+    ], function(Map, SceneView, GraphicsLayer, TimeSlider, Graphic, PopupTemplate) {
 
         var graphicsLayer = new GraphicsLayer();
 
@@ -41,6 +42,25 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
             },
             size: 5
         };
+
+        const timeSlider = new TimeSlider({
+            container: "timeSlider",
+            mode: "time-window",
+            view: view
+          });
+          view.ui.add(timeSlider, "manual");
+
+          view.ui.add("titleDiv", "top-right");
+
+          view.whenLayerView(layer).then(function(lv) {
+            const fullTimeExtent = layer.timeInfo.fullTimeExtent;
+  
+            // set up time slider properties
+            timeSlider.fullTimeExtent = fullTimeExtent;
+            timeSlider.stops = {
+              interval: layer.timeInfo.interval
+            };
+          });
 
         var PopupTemplate = {
             title: "Fundstelle {Gorge} ",
@@ -172,9 +192,9 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
           var site = daten[i].Site;
           var gorge = daten[i].Gorge;
           var siteIMG1 = daten[i].SiteIMG1, siteIMG2 = daten[i].SiteIMG2, siteIMG3 = daten[i].SiteIMG3, siteIMG4 = daten[i].SiteIMG4, siteIMG5 = daten[i].SiteIMG5, siteIMG6 = daten[i].SiteIMG6, siteIMG7 = daten[i].SiteIMG7, siteIMG8 = daten[i].SiteIMG8, siteIMG9 = daten[i].SiteIMG9, siteIMG10 = daten[i].SiteIMG10;
-          var img1 = daten[i].Picture_Link_to_gorge1, img2 = daten[i].Picture_Link_to_gorge2, img3 = daten[i].Picture_Link_to_gorge3, img4 = daten[i].Picture_Link_to_gorge4, img5 = daten[i].Picture_Link_to_gorge5, img6 = daten[i].Picture_Link_to_gorge6, img7 = daten[i].Picture_Link_to_gorge7, img8 = daten[i].Picture_Link_to_gorge8, img9 = daten[i].Picture_Link_to_gorge9, img10 = daten[i].Picture_Link_to_gorge10;
+          var img1 = daten[i].IMG1, img2 = daten[i].IMG2, img3 = daten[i].IMG3, img4 = daten[i].IMG4, img5 = daten[i].IMG5, img6 = daten[i].IMG6, img7 = daten[i].IMG7, img8 = daten[i].IMG8, img9 = daten[i].IMG9, img10 = daten[i].IMG10;
           
-        var attributes = {
+          var attributes = {
             Lat: lat,
             Long: long,
             Site: site,
