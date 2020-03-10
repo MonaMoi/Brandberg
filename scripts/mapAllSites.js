@@ -41,6 +41,8 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
         if(getSitesLayerToggle.checked){
           getSites();
           document.getElementById("search").value = "";
+        } else if(!getSitesLayerToggle.checked){
+            clearLayer();
         }
       });
 
