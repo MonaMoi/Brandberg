@@ -1,4 +1,4 @@
-$.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
+$.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data) {
     var daten = data;
     
     require([
@@ -42,6 +42,29 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
             }
         });
 
+      var coordsWidget = document.createElement("div");
+      coordsWidget.id = "coordsWidget";
+      coordsWidget.className = "esri-widget esri-component";
+      coordsWidget.style.padding = "7px 15px 5px";
+      coordsWidget.style.margin = "7px 10px 47px";
+
+      view.ui.add(coordsWidget, "bottom-right");
+        
+        
+      function showCoordinates(pt) {
+        var coords = "Lat/Lon " + pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) +
+            " | Scale 1:" + Math.round(view.scale * 1) / 1;
+        coordsWidget.innerHTML = coords;
+      }
+        
+      view.watch("stationary", function(isStationary) {
+        showCoordinates(view.center);
+      });
+
+      view.on("pointer-move", function(evt) {
+        showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
+      });
+
         var simpleMarkerSymbol = {
             type: "simple-marker",
             color: [226, 119, 40], // orange
@@ -53,114 +76,114 @@ $.getJSON('../database/json/TabelleMitCoordinates.json', function(data) {
         };
 
         var PopupTemplate = {
-            title: "Fundstelle {Gorge} ",
-  
-            content: [{
-              type: "fields",
-              fieldInfos: [{
-                fieldName: "Point_Count",
-                visible: false,
-                label: "Count of Points",
-                format: {
-                  places: 0,
-                  digitSeparator: true
-                }
-              }, {
-                fieldName: "relationships/0/Point_Count_COMMON",
-                visible: false,
-                label: "Number of figures",
-                format: {
-                  places: 0,
-                  digitSeparator: true
-                },
-                statisticType: "sum"
-              }, {
-                fieldName: "relationships/0/COMMON",
-                visible: false,
-                label: "Common Name"
-              }, {
-                fieldName: "BLOCKCE10",
-                visible: false,
-                label: "Block"
-              }]
+          title: "Fundstelle {Gorge} ",
+
+          content: [{
+            type: "fields",
+            fieldInfos: [{
+              fieldName: "Point_Count",
+              visible: false,
+              label: "Count of Points",
+              format: {
+                places: 0,
+                digitSeparator: true
+              }
             }, {
-              type: "text", // TextContentElement
-              text: "{Lat} <br> {Long} <br> Diese Site {Site} liegt in der Gorge {Gorge}."
+              fieldName: "relationships/0/Point_Count_COMMON",
+              visible: false,
+              label: "Number of figures",
+              format: {
+                places: 0,
+                digitSeparator: true
+              },
+              statisticType: "sum"
             }, {
-              type: "media", // MediaContentElement
-              mediaInfos: [{
-                title: "Felsmalerei",
-                type: "image",
-                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG1}/zz_additional_data/Photo/preview_1600_{IMG1}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG2}/zz_additional_data/Photo/preview_1600_{IMG2}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG3}/zz_additional_data/Photo/preview_1600_{IMG3}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG4}/zz_additional_data/Photo/preview_1600_{IMG4}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG5}/zz_additional_data/Photo/preview_1600_{IMG5}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG6}/zz_additional_data/Photo/preview_1600_{IMG6}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG7}/zz_additional_data/Photo/preview_1600_{IMG7}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG8}/zz_additional_data/Photo/preview_1600_{IMG8}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG9}/zz_additional_data/Photo/preview_1600_{IMG9}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "Dies ist ein Bild aus der Gorge {Gorge}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG10}/zz_additional_data/Photo/preview_1600_{IMG10}.png"
-                }
-              }]
+              fieldName: "relationships/0/COMMON",
+              visible: false,
+              label: "Common Name"
+            }, {
+              fieldName: "BLOCKCE10",
+              visible: false,
+              label: "Block"
             }]
-          }
+          }, {
+            type: "text", // TextContentElement
+            text: "{Lat} <br> {Long} <br> Diese Site {Site} liegt in der Gorge {Gorge}."
+          }, {
+            type: "media", // MediaContentElement
+            mediaInfos: [{
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG1}/zz_additional_data/Photo/preview_1600_{IMG1}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG2}/zz_additional_data/Photo/preview_1600_{IMG2}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG3}/zz_additional_data/Photo/preview_1600_{IMG3}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG4}/zz_additional_data/Photo/preview_1600_{IMG4}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG5}/zz_additional_data/Photo/preview_1600_{IMG5}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG6}/zz_additional_data/Photo/preview_1600_{IMG6}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG7}/zz_additional_data/Photo/preview_1600_{IMG7}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG8}/zz_additional_data/Photo/preview_1600_{IMG8}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG9}/zz_additional_data/Photo/preview_1600_{IMG9}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG10}/zz_additional_data/Photo/preview_1600_{IMG10}.png"
+              }
+            }]
+          }]
+        }
          
         function getSitesNumberofGorge(){
             var numberofSitesinGorge = 0;
