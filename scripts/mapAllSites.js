@@ -1,3 +1,5 @@
+
+
 $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data) {
     var daten = data;
     
@@ -32,28 +34,75 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
             }
         });
 
+      document.getElementById("search").value = "";
+      var getSitesLayerToggle = document.getElementById("0");
+      getSitesLayerToggle.checked = true;
+      getSitesLayerToggle.addEventListener("change", function() {
+        if(getSitesLayerToggle.checked){
+          getSites();
+          document.getElementById("search").value = "";
+        }
+      });
 
-        var coordsWidget = document.createElement("div");
+        $("#search").keydown(function (e) {
+          if (e.keyCode == 13) {
+            searchForSite();
+          }
+        });
+
+        $('#button1').click(function(){
+          searchForSite();
+        });
+
+      function searchForSite(){
+        var input = document.getElementById("search").value;
+          var site;
+          var gorge;
+          var state = 0;
+          input = input.toLowerCase();
+          input = input.replace(/ /g, '');
+          for (var i = 0; i < daten.length; i++) {
+            gorge = daten[i].Gorge;
+            gorge = gorge.toLowerCase();
+            gorge = gorge.replace(/ /g, '');
+            site = daten[i].Site;
+            site = site.toLowerCase();
+            site = site.replace(/ /g, '');
+            if(site == input){
+
+              getSitesLayerToggle.checked = false;
+              clearLayer();
+              addPoint(i);
+            }else if(gorge == input){
+              if(state == 0){
+                clearLayer();
+                getSitesLayerToggle.checked = false;
+                state = 1;
+              }else{
+                addPoint(i);
+              }
+            }
+          }
+      }
+      
+      
+        
+        
+
+      var coordsWidget = document.createElement("div");
       coordsWidget.id = "coordsWidget";
       coordsWidget.className = "esri-widget esri-component";
       coordsWidget.style.padding = "7px 15px 5px";
       coordsWidget.style.margin = "7px 10px 47px";
-
       view.ui.add(coordsWidget, "bottom-right");
-        
-        
-        //*** ADD ***//
       function showCoordinates(pt) {
         var coords = "Lat/Lon " + pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) +
             " | Scale 1:" + Math.round(view.scale * 1) / 1;
         coordsWidget.innerHTML = coords;
       }
-        
-        
-        view.watch("stationary", function(isStationary) {
+      view.watch("stationary", function(isStationary) {
         showCoordinates(view.center);
       });
-
       view.on("pointer-move", function(evt) {
         showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
       });
@@ -269,10 +318,6 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
                 ]
               };
 
-              
-
-
-
             var fillSymbol = {
             type: "simple-fill",
             color: [227, 139, 79, 0.8],
@@ -361,3 +406,4 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
 *
 *
  */
+

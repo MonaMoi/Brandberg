@@ -192,10 +192,13 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
             for (var i = 0; i < daten.length; i++) {
                 if(daten[i].Gorge == temp){
                     temp = daten[i].Gorge;
+                    console.log(temp);
                     numberofSitesinGorge = numberofSitesinGorge + 1;
                 }else{
-                    console.log(numberofSitesinGorge);
-                    NumberInPercent = (839 / 100) * numberofSitesinGorge;
+                    
+                    NumberInPercent = (numberofSitesinGorge * 100) /839;
+                    NumberInPercent = NumberInPercent * 25 + 350;
+                    console.log(NumberInPercent);
                     getGorgeBars(NumberInPercent, temp);
                     temp = daten[i].Gorge;
                     numberofSitesinGorge = 1;
@@ -213,8 +216,8 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
             14.470143, -21.120104, numOfSites, "Circus",
             14.458018, -21.169877, numOfSites, "Dom",
             14.589272, -21.215102, numOfSites, "Eros",
-            14.551528, -21.210224, numOfSites, "Furrow",
-            14.573625, -21.210378, numOfSites, "Ga'aseb",
+            14.634025, -21.182337, numOfSites, "Sesaub / Basswaldrinne",
+            14.573625, -21.210378, numOfSites, "Gaaseb",
             14.543473, -21.187160, numOfSites, "Hungorob",
             14.518668, -21.079570, numOfSites, "Karoab",
             14.499378, -21.068345, numOfSites, "Märchen",

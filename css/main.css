@@ -30,6 +30,17 @@ text-align: center;
     opacity: 0.75;
   }
 
+  #layerToggleAll {
+    top: 73px;
+    left: 60px;
+    position: absolute;
+    z-index: 99;
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    opacity: 0.75;
+  }
+
 
 :root {
     --jumbotron-padding-y: 3rem;
