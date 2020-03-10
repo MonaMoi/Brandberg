@@ -43,58 +43,65 @@
         </div>  
       </nav>
 
-      <div id="viewDiv"></div>
+      <section class="jumbotron text-center" style="background-image: url(../database/img/BackgroundIndex.jpg); background-size: cover;">
+        <div class="container">
+          <h1 class="jumbotron-heading">Die Felsmalereien im Brandberg</h1>
+          <p>Willkommen auf unserer Seite! 
+            Im Rahmen eines Seminars am Institut für Digital Humanities der Universität zu Köln wurde diese Webapplikation erstellt. Das Thema sind die Felsmalereien im 420km² großen Brandberg in der namibischen Wüste. Das Brandbergmassiv befindet sich in der westlichen Region Erongo und überragt das umliegende Land mit einer durchschnittliche Höhe von ca. 2500m. 
+            Der noch heute genutzte offizielle Name Brandberg stammt von der glühenden Farbe, in der der Berg erscheint, wenn die Sonne von Westen auf ihn scheint.<br>
+            <br>
+            Harald Pager, ein österreichischer Grafikdesigner, dokumentierte mit Hilfe von lokalen Bergführern mehr als 39.000 einzelne Felsbildmotive aus 671 Fundstellen von 1977 bis zu Pager’s Tod im Jahre 1985. Es entstanden Hunderte von Zeichnungen und Fotographien.
+            Das Heinrich-Barth-Institut wertete die Arbeiten aus und publizierte sie zwischen 1989 und 2006 in sechs wissenschaftlichen Katalogen. Das African Archaeology Archive (AAArC) digitalisierte die Bestände und stellt sie auf www.ianus-fdz.de frei zur Verfügung. Diese Datenbank dient uns als Datenbasis und macht somit das Projekt wissenschaftlich korrekt und wahrhaftig. 
+            <br>
+            <br>
+            Unser Ziel ist die große Anzahl von Entdeckungen/ Fotographien zusammen mit weiteren Forschungsdaten anschaulich darzustellen. Daher geben wir sowohl einen kleinen Einblick in die Arbeiten von Harald Pager und den lokalen Bergführern als auch einen weiteren Zugang zu den in Textform vorliegenden Daten durch unsere Visualisierungen.
+            <br>
+            <br>
+            Das Projekt wurde mit der ArcGIS API für Javascript erstellt.
+            <br>
+            <br>
+            <BUTTON> Los geht’s </BUTTON></p>
+        </div>
+      </section>
+
+      <section class="jumbotron text-center">
+        <h3>Um eine gewisse Authentizität zu erhalten, haben wir die englischen Begriffe aus der Tabelle übernommen. Klären wir zunächst die verwendeten Begrifflichkeiten</h3> 
+
+         <p>
+          SITE: Listet die Site-Codes in der in den 
+          Veröffentlichungen verwendeten 
+          Reihenfolge auf (PAGER 1989–2006).
+         </p>
+         <p>
+          GORGE: Die vollständigen Namen der entsprechenden Felsschlucht.
+        </p>
+        <p>
+          SPATIALITY: Gibt die Anzahl der Erwachsenen an, die sich idealerweise unter dem Schutz des überhängenden Felsens hätten ausstrecken können.
+        </p>
+        <p>
+          WATER AVAILABILITY: In Bezug auf die topografische Situation wurden Beobachtungen darüber aufgezeichnet, ob Wasser innerhalb weniger Minuten zu Fuß zugänglich ist. (WATER IN SIGHT = true)
+          in Sichtweite < 300m
+          in Rufweite  > 300m
+          Mit schreiender Entfernung
+        </p>
+        <p>
+          LIVING PLACE: Kategorisierung für die "Lebensqualität" eines Felsschutzes. Ein „spacious“ Unterschlupf hat einen mehr oder weniger flachen, ebenen Boden und ist hoch genug, damit eine 170 cm große Person aufrecht unter dem Dach stehen kann. Ein „unfavourable“ Unterschlupf ist ein Ort mit unebenem, geneigtem Boden und / oder ein Ort, an dem es unmöglich ist, im Inneren aufzustehen. Ein „± vertical rock“ ist ein Felsbrocken ohne Überhang, der eine Person schützen könnte.
+        </p> 
+        <p>
+          OPEN FIELD: Markiert das Vorhandensein einer offenen Ebene von mindestens 10 x 10 m, die die Durchführung sozialer Aktivitäten ermöglicht, die einen solchen Raum erfordern, zB. tanzen oder spielen.
+          (OPEN FIELD IN SIGHT = true)
+          in Sichtweite < 300m
+          in Rufweite  > 300m
+          Mit schreiender Entfernung
+        </p>
+        <p>
+          QUANTITY OF ARTEFACTS: In der frühen Phase der Feldaufzeichnung wurden ARTEFAKTE aufgezeichnet, indem die Gesamtmenge der Artefakte am Standort (keine, wenige, mittlere Menge, viele, Massen) geschätzt wurde.
+        </p>
+      </section>
+
+      <div class="jumbotron text-center" style="margin-bottom:0">
+        <p> © Clemens Haberl, Markus Haberl und Mona Moinipour</p>
 
     </body>
       
-        <!-- <div id="viewDiv"></div> 
-
-        <div class="container" style="margin-top:30px">
-          <div class="row">
-            <div class="col-sm-4">
-              <h2>About Me</h2>
-              <h5>Photo of me:</h5>
-              <div class="fakeimg">Fake Image</div>
-              <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-              <h3>Some Links</h3>
-              <p>Lorem ipsum dolor sit ame.</p>
-              <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                  <a class="nav-link active" href="#">Active</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-              </ul>
-              <hr class="d-sm-none">
-            </div>
-            <div class="col-sm-8">
-              <h2>TITLE HEADING</h2>
-              <h5>Title description, Dec 7, 2017</h5>
-              <div class="fakeimg">Fake Image</div>
-              <p>Some text..</p>
-              <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-              <br>
-              <h2>TITLE HEADING</h2>
-              <h5>Title description, Sep 2, 2017</h5>
-              <div class="fakeimg">Fake Image</div>
-              <p>Some text..</p>
-              <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="jumbotron text-center" style="margin-bottom:0">
-          <p>Footer</p>
-        </div>
-    </body>
-    <script src="https://js.arcgis.com/4.14/"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="../scripts/map.js"></script>
-</html>
+   
