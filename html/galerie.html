@@ -25,17 +25,17 @@
             <li class="nav-item">
               <a class="nav-link" style="color: white;" href="index.html">Start</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" style="color: white;" href="mapGorges.html">MapGorges</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" style="color: white;" href="mapAllSites.html">MapAll</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" style="color: white;" href="mapBars.html">MapBars</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" style="color: white;" href="mapTimeSlider.html">MapTime</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white;">Map</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="mapAllSites.html">Sites</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="mapGorges.html">Gorges</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="mapBars.html">Bars</a>      
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="mapTimeSlider.html">Time Slider</a>            
+              </div>
             </li>
             <li class="nav-item">
               <a class="nav-link" style="color: white;" href="galerie.html">Galerie</a>
@@ -52,26 +52,23 @@
         <p>Am Brandberg wurden bis heute rund 50.000 Felsmalereien an 1.000 Fundorten nachgewiesen – zumeist an Überhängen und in unzugänglichem Gelände. Diese große Anzahl deutet auf einen großen Tierreichtum in vergangener Zeit hin. </p>
       </div>
     </section>
-<!--Bild korrierigen + Hover-->
-    <section>
-        <div class="container">
-            <div class="card lg-9" style="width: 40rem;">
-                <img class="card-img-top" src="../database/img/WhiteLady.png" alt="Card image cap">
-                     <div class="card-body text-center">
-                         <h5 class="card-title">Die White Lady</h5>
-                             <p class="card-text">Die bekannteste dieser Kunstwerke ist die ca. 45 cm große Weiße Dame (White Lady), die am 4. Januar 1918 von Reinhard Maack in der Tsisab-Schlucht entdeckt wurde und eine der schönsten vorgeschichtlichen Felsmalereien darstellt.
 
-                                 Neben diesem vermutlichen Krieger, der auch als Schamane gedeutet werden kann, sind zahlreiche weitere Jäger mit Speeren oder Bögen zu sehen. Diese sind umgeben vom typischen Jagdwild wie z. B. Oryxantilopen und Zebras. Das Alter der Zeichnungen wird auf zwei- bis viertausend Jahre geschätzt. Ob es sich dabei nur um Jagdszenen zum Beschwören des Jagdglücks handelt oder um Trancetänze von Schamanen, die mit Hilfe von Geistern in Tiergestalt heilen, ist nicht geklärt.</p>
-                     </div>
-    
-            </div>
+<div class="py-5 text-center border border-dark rounded shadow-lg p-3 mb-5 bg-white rounded">
+  <h3 class="jumbotron-headind">Die White Lady</h3>
+  <div class="row justify-content-center">
+    <div class="col-lg-9 col-md-8">
+      <div class="hover hover-2 text-white rounded"><img src="../database/img/WhiteLady.png" alt="" class="img-fluid rounded">
+        <div class="hover-overlay"></div>
+          <p class="hover-2-description mb-0" style="padding: 15px;">Die bekannteste dieser Kunstwerke ist die ca. 45 cm große Weiße Dame (White Lady), die am 4. Januar 1918 von Reinhard Maack in der Tsisab-Schlucht entdeckt wurde und eine der schönsten vorgeschichtlichen Felsmalereien darstellt.<br><br>Neben diesem vermutlichen Krieger, der auch als Schamane gedeutet werden kann, sind zahlreiche weitere Jäger mit Speeren oder Bögen zu sehen. Diese sind umgeben vom typischen Jagdwild wie z. B. Oryxantilopen und Zebras. Das Alter der Zeichnungen wird auf zwei- bis viertausend Jahre geschätzt. Ob es sich dabei nur um Jagdszenen zum Beschwören des Jagdglücks handelt oder um Trancetänze von Schamanen, die mit Hilfe von Geistern in Tiergestalt heilen, ist nicht geklärt.</p>
         </div>
-    </section>
+      </div>
+    </div>
+</div>
 
 
     <h2 id="titleimg">Hier ein paar weitere Eindrücke der Feldforschung</h2>
     <h6 class="text-center">Zum Vollbildmodus Bild anklicken</h6>
-    <div class="mdb-lightbox no-margin row">
+    <div class="mdb-lightbox row">
 
       <figure class="col-md-4">
         <a href="http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/zz_additional_data/Photo/preview_800_AAArC-HP0000025-1-PB-77-0-0-F-3_5.tif.png" data-size="1600x1067">

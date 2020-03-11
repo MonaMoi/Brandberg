@@ -8,15 +8,16 @@
     <link rel="stylesheet" href="https://js.arcgis.com/4.14/esri/themes/light/main.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/main.css">
+    <script src="../scripts/hover.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-    <title>Das Brandberg Projekt</title>
+        <title>Das Brandberg Projekt</title>
 
 </head>
     <body>
-      
+     
       <nav class="navbar navbar-expand-md bg-dark navbar-dark">
        
         <div class="navbar-collapse justify-content-center">
@@ -24,17 +25,17 @@
             <li class="nav-item">
               <a class="nav-link" style="color: white;" href="index.html">Start</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" style="color: white;" href="mapGorges.html">MapGorges</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" style="color: white;" href="mapAllSites.html">MapAll</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" style="color: white;" href="mapBars.html">MapBars</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" style="color: white;" href="mapTimeSlider.html">MapTime</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white;">Map</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="mapAllSites.html">Sites</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="mapGorges.html">Gorges</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="mapBars.html">Bars</a>      
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="mapTimeSlider.html">Time Slider</a>            
+              </div>
             </li>
             <li class="nav-item">
               <a class="nav-link" style="color: white;" href="galerie.html">Galerie</a>
@@ -42,130 +43,153 @@
           </ul>
         </div>  
       </nav>
+    
+      <div id="parallax-image">
+          <div class="row h-100">
+              <div class="col-md-12 text-center">
+                <h1 class="jumbotron-heading">Die Felsmalereien im Brandberg</h1>
+                <p id="welcome">Willkommen auf unserer Seite! 
+                  Im Rahmen eines Seminars am Institut für <br>
+                  Digital Humanities der Universität zu Köln <br>
+                  wurde diese Webapplikation erstellt. <br>
+                  Das Thema sind die Felsmalereien im 422km² großen Brandberg <br>
+                  in der namibischen Wüste. <br>
+                  Das Brandbergmassiv befindet sich in der westlichen Region Erongo <br>
+                  und überragt das umliegende Land mit einer durchschnittliche Höhe von ca. 2500m. <br>
+                  Der noch heute genutzte offizielle Name Brandberg stammt von der glühenden Farbe, <br>
+                  in der der Berg erscheint, wenn die Sonne von Westen auf ihn scheint.<br>
+                  <br>
+                  Harald Pager, ein österreichischer Grafikdesigner, <br>
+                  dokumentierte mit Hilfe von lokalen Bergführern mehr als <br>
+                  39.000 einzelne Felsbildmotive aus 671 Fundstellen von 1977 bis zu Pager’s Tod im Jahre 1985.<br>
+                  Es entstanden Hunderte von Zeichnungen und Fotographien.<br>
+                  Das Heinrich-Barth-Institut wertete die Arbeiten aus und <br>
+                  publizierte sie zwischen 1989 und 2206 in sechs wissenschaftlichen Katalogen. <br>
+                  Das African Archaeology Archive (AAArC) digitalisierte die Bestände <br>
+                  und stellt sie auf www.ianus-fdz.de frei zur Verfügung. <br>
+                  Diese Datenbank dient uns als Datenbasis und macht somit das Projekt <br>
+                  wissenschaftlich korrekt und wahrhaftig. 
+                  <br>
+                  <br>
+                  Unser Ziel ist die große Anzahl von Entdeckungen/ Fotographien zusammen mit weiteren Forschungsdaten <br>
+                  anschaulich darzustellen. Daher geben wir sowohl einen kleinen Einblick in die Arbeiten von Harald Pager <br>
+                  und den lokalen Bergführern als auch einen weiteren Zugang zu den in Textform vorliegenden Daten durch unsere Visualisierungen.
+                  <br>
+                  <br>
+                  Das Projekt wurde mit der ArcGIS API für Javascript erstellt.
+                  <br>
+                
+              </div>
+          </div>
+      </div>
+      <div class="container">
+        <section class="jumbotron text-center" id="begriffe">
 
-      <section class="jumbotron text-center" style="background-image: url(../database/img/BackgroundIndex.jpg); background-size: cover;">
-        <div class="container">
-          <h1 class="jumbotron-heading">Die Felsmalereien im Brandberg</h1>
-          <p>Willkommen auf unserer Seite! 
-            Im Rahmen eines Seminars am Institut für Digital Humanities der Universität zu Köln wurde diese Webapplikation erstellt. Das Thema sind die Felsmalereien im 422km² großen Brandberg in der namibischen Wüste. Das Brandbergmassiv befindet sich in der westlichen Region Erongo und überragt das umliegende Land mit einer durchschnittliche Höhe von ca. 2500m. 
-            Der noch heute genutzte offizielle Name Brandberg stammt von der glühenden Farbe, in der der Berg erscheint, wenn die Sonne von Westen auf ihn scheint.<br>
-            <br>
-            Harald Pager, ein österreichischer Grafikdesigner, dokumentierte mit Hilfe von lokalen Bergführern mehr als 39.000 einzelne Felsbildmotive aus 671 Fundstellen von 1977 bis zu Pager’s Tod im Jahre 1985. Es entstanden Hunderte von Zeichnungen und Fotographien.
-            Das Heinrich-Barth-Institut wertete die Arbeiten aus und publizierte sie zwischen 1989 und 2206 in sechs wissenschaftlichen Katalogen. Das African Archaeology Archive (AAArC) digitalisierte die Bestände und stellt sie auf www.ianus-fdz.de frei zur Verfügung. Diese Datenbank dient uns als Datenbasis und macht somit das Projekt wissenschaftlich korrekt und wahrhaftig. 
-            <br>
-            <br>
-            Unser Ziel ist die große Anzahl von Entdeckungen/ Fotographien zusammen mit weiteren Forschungsdaten anschaulich darzustellen. Daher geben wir sowohl einen kleinen Einblick in die Arbeiten von Harald Pager und den lokalen Bergführern als auch einen weiteren Zugang zu den in Textform vorliegenden Daten durch unsere Visualisierungen.
-            <br>
-            <br>
-            Das Projekt wurde mit der ArcGIS API für Javascript erstellt.
-            <br>
-            <br>
-            <BUTTON> Los geht’s </BUTTON></p>
-        </div>
-      </section>
-
-      <section>
-
-        <h3  class="jumbotron text-center">Begriffe</h3> 
-
-        <div class="card row">
-
-          <div class="col-md-12">
-          <div class="card-header text-center p-3 mb-2 bg-light text-dark">
-          SITE
+            <h3 class="jumbotron-heading" style="text-transform: uppercase";>Begriffe</h3> 
+    
+            <div class="card row">
+    
+              <div class="col-md-12">
+              <div class="card-header text-center p-3 mb-2 bg-light text-dark">
+              SITE
+              </div>
+              <div class="card-body">
+                <p class="card-text">Listet die Site-Codes in der in den Veröffentlichungen verwendeten Reihenfolge auf (PAGER 1989–2206).</p>
+              </div>
+            </div>
+    
+            <div class="col-md-12">
+              <div class="card-header text-center p-3 mb-2 bg-light text-dark">
+              GORGE
+              </div>
+              <div class="card-body">
+                <p class="card-text">Die vollständigen Namen der entsprechenden Felsschlucht.</p>
+              </div>
+            </div>
+    
+            <div class="col-md-12">
+              <div class="card-header text-center p-3 mb-2 bg-light text-dark">
+              SPATIALITY
+              </div>
+              <div class="card-body">
+                <p class="card-text">Gibt die Anzahl der Erwachsenen an, die sich idealerweise unter dem Schutz des überhängenden Felsens hätten ausstrecken können.
+                </p>
+              </div>
+            </div>
+    
+            <div class="col-md-12">
+              <div class="card-header text-center p-3 mb-2 bg-light text-dark">
+              WATER AVAILABILITY
+              </div>
+              <div class="card-body">
+                <p class="card-text">In Bezug auf die topografische Situation wurden Beobachtungen darüber aufgezeichnet, ob Wasser innerhalb weniger Minuten zu Fuß zugänglich ist (WATER IN SIGHT = true).<br>
+                  In Sichtweite < 300m 
+                  <br>
+                  In Rufweite  > 300m  
+                  <br>
+                  Mit schreiender Entfernung</p>
+              </div>
+            </div>
+    
+            <div class="col-md-12">
+              <div class="card-header text-center p-3 mb-2 bg-light text-dark">
+              LIVING PLACE
+              </div>
+              <div class="card-body">
+                <p class="card-text">Kategorisierung für die "Lebensqualität" eines Felsschutzes. Ein „spacious“ Unterschlupf hat einen mehr oder weniger flachen, ebenen Boden und ist hoch genug, damit eine 170 cm große Person aufrecht unter dem Dach stehen kann. Ein „unfavourable“ Unterschlupf ist ein Ort mit unebenem, geneigtem Boden und / oder ein Ort, an dem es unmöglich ist, im Inneren aufzustehen. Ein „± vertical rock“ ist ein Felsbrocken ohne Überhang, der eine Person schützen könnte.</p>
+              </div>
+            </div>
+    
+            <div class="col-md-12">
+              <div class="card-header text-center p-3 mb-2 bg-light text-dark">
+              OPEN FIELD
+              </div>
+              <div class="card-body">
+                <p class="card-text">Markiert das Vorhandensein einer offenen Ebene von mindestens 10 x 10 m, die die Durchführung sozialer Aktivitäten ermöglicht, die einen solchen Raum erfordern, zB. tanzen oder spielen (OPEN FIELD IN SIGHT = true).<br>
+                  In Sichtweite < 300m
+                  <br>
+                  In Rufweite  > 300m
+                  <br>
+                  Mit schreiender Entfernung</p>
+              </div>
+            </div>
+            
+            <div class="col-md-12" style="padding-bottom:50px;">
+              <div class="card-header text-center p-3 mb-2 bg-light text-dark">
+              QUANTITY OF ARTEFACTS
+              </div>
+              <div class="card-body">
+                <p class="card-text">In der frühen Phase der Feldaufzeichnung wurden ARTEFAKTE aufgezeichnet, indem die Gesamtmenge der Artefakte am Standort (keine, wenige, mittlere Menge, viele, Massen) geschätzt wurde.</p>
+              </div>
+            </div>
+    
           </div>
-          <div class="card-body">
-            <p class="card-text">Listet die Site-Codes in der in den Veröffentlichungen verwendeten Reihenfolge auf (PAGER 1989–2206).</p>
-          </div>
-        </div>
-
-        <div class="col-md-12">
-          <div class="card-header text-center p-3 mb-2 bg-light text-dark">
-          GORGE
-          </div>
-          <div class="card-body">
-            <p class="card-text">Die vollständigen Namen der entsprechenden Felsschlucht.</p>
-          </div>
-        </div>
-
-        <div class="col-md-12">
-          <div class="card-header text-center p-3 mb-2 bg-light text-dark">
-          SPATIALITY
-          </div>
-          <div class="card-body">
-            <p class="card-text">Gibt die Anzahl der Erwachsenen an, die sich idealerweise unter dem Schutz des überhängenden Felsens hätten ausstrecken können.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-md-12">
-          <div class="card-header text-center p-3 mb-2 bg-light text-dark">
-          WATER AVAILABILITY
-          </div>
-          <div class="card-body">
-            <p class="card-text">In Bezug auf die topografische Situation wurden Beobachtungen darüber aufgezeichnet, ob Wasser innerhalb weniger Minuten zu Fuß zugänglich ist (WATER IN SIGHT = true).<br>
-              In Sichtweite < 300m 
-              <br>
-              In Rufweite  > 300m  
-              <br>
-              Mit schreiender Entfernung</p>
-          </div>
-        </div>
-
-        <div class="col-md-12">
-          <div class="card-header text-center p-3 mb-2 bg-light text-dark">
-          LIVING PLACE
-          </div>
-          <div class="card-body">
-            <p class="card-text">Kategorisierung für die "Lebensqualität" eines Felsschutzes. Ein „spacious“ Unterschlupf hat einen mehr oder weniger flachen, ebenen Boden und ist hoch genug, damit eine 170 cm große Person aufrecht unter dem Dach stehen kann. Ein „unfavourable“ Unterschlupf ist ein Ort mit unebenem, geneigtem Boden und / oder ein Ort, an dem es unmöglich ist, im Inneren aufzustehen. Ein „± vertical rock“ ist ein Felsbrocken ohne Überhang, der eine Person schützen könnte.</p>
-          </div>
-        </div>
-
-        <div class="col-md-12">
-          <div class="card-header text-center p-3 mb-2 bg-light text-dark">
-          OPEN FIELD
-          </div>
-          <div class="card-body">
-            <p class="card-text">Markiert das Vorhandensein einer offenen Ebene von mindestens 10 x 10 m, die die Durchführung sozialer Aktivitäten ermöglicht, die einen solchen Raum erfordern, zB. tanzen oder spielen (OPEN FIELD IN SIGHT = true).<br>
-              In Sichtweite < 300m
-              <br>
-              In Rufweite  > 300m
-              <br>
-              Mit schreiender Entfernung</p>
-          </div>
-        </div>
-        
-        <div class="col-md-12">
-          <div class="card-header text-center p-3 mb-2 bg-light text-dark">
-          QUANTITY OF ARTEFACTS
-          </div>
-          <div class="card-body">
-            <p class="card-text">In der frühen Phase der Feldaufzeichnung wurden ARTEFAKTE aufgezeichnet, indem die Gesamtmenge der Artefakte am Standort (keine, wenige, mittlere Menge, viele, Massen) geschätzt wurde.</p>
-          </div>
-        </div>
 
       </div>
 
-        <div class="parallax1"> <img src="../database/img/Parallaximg2.png")></div>
-        <!--Beschreibungen hinzufügen-->
-        <div style="height:1000px;text-transform: uppercase;" class="text-center p-3 mb-2">
-          <h6>Der Menüpunkt „Karte“ beinhaltet drei Unterseiten mit verschiedenen Darstellungen unserer Daten:</h6>
-          <br>
-          <a href="mapAllSites.html">AllSites:</a> Satellitenaufnahme des Brandbergs mit Markierungen der Fundstellen…
-          <br>
-          <a href="mapGorges.html">Gorges:</a> Satellitenaufnahme mit Unterscheidungen…..
-          <br>
-          <a href="mapBars.html">Balken:</a> 
-          <br>
-          <a href="mapTimeSlider.html">Time Slider:</a> 
-          <br>
-          <a href="galerie.html">Galerie:</a> In der Galerie finden Sie einige Eindrücke, die während der Feldforschung aufgenommen worden sind.
-          </div>
-        <!--Parallax2 funktioniert noch nicht-->
-        <div class="parralax2"></div>
-          <!--Bildergrößen anpassen-->
-        <div class="jumbotron row justify-content-center">
-        <div class="card box col-lg-2 text-center" style="width: 22rem;">
+      <div id="parallax-image1"></div>
+
+    <div class="container">
+       <div style="text-transform: uppercase;" class="text-center p-3 mb-2">
+            <h6>Der Menüpunkt „Karte“ beinhaltet drei Unterseiten mit verschiedenen Darstellungen unserer Daten:</h6>
+            <br>
+            <a href="mapAllSites.html">AllSites:</a> Satellitenaufnahme des Brandbergs mit Markierungen der Fundstellen…
+            <br>
+            <a href="mapGorges.html">Gorges:</a> Satellitenaufnahme mit Unterscheidungen…..
+            <br>
+            <a href="mapBars.html">Balken:</a> 
+            <br>
+            <a href="mapTimeSlider.html">Time Slider:</a> 
+            <br>
+            <a href="galerie.html">Galerie:</a> In der Galerie finden Sie einige Eindrücke, die während der Feldforschung aufgenommen worden sind.
+            </div>>
+    </div>
+
+    <div id="parallax-image2"></div>
+
+    <div class="container">
+      <div class="jumbotron row justify-content-center">
+        <div class="card text-center" style="width: 15rem;">
           <img class="card-img-top" src="../database/img/Mapimg.jpg" alt="Card image cap">
           <div class="card-body">
             <h6 class="card-title">Eckdaten</h6>
@@ -180,7 +204,7 @@
           </div>
         </div>
 
-        <div class="card box col-lg-2 text-center" style="width: 22rem;">
+        <div class="card text-center" style="width: 15rem;">
           <img class="card-img-top" src="../database/img/Crewimg.png" alt="Card image cap">
           <div class="card-body">
             <h6 class="card-title">Datenerzeugung</h6>
@@ -194,7 +218,7 @@
           </div>
         </div>
 
-        <div class="card box col-lg-2 text-center" style="width: 22rem;">
+        <div class="card text-center" style="width: 15rem;">
           <img class="card-img-top" src="../database/img/Publicationsimg.png" alt="Card image cap">
           <div class="card-body">
             <h6 class="card-title">Publikation</h6>
@@ -208,7 +232,7 @@
           </div>
         </div>
 
-        <div class="card box col-lg-2 text-center" style="width: 22rem;">
+        <div class="card text-center" style="width: 15rem;">
           <img class="card-img-top" src="../database/img/AAArcimg.jpg" alt="Card image cap">
           <div class="card-body">
             <h6 class="card-title">Digitalisierung</h6>
@@ -221,10 +245,13 @@
             <a href="https://arachne.dainst.org/project/afrarchcologne" class="card-link">Hier geht es zum AAArC Archiv</a>
           </div>
         </div>
+   </div>
 
-      </div>
-
-      <div class="jumbotron text-center" style="margin-bottom:0">
-        <p> © Clemens Haberl, Markus Haberl und Mona Moinipour</p>
+    <div class="jumbotron text-center" style="margin-bottom:0">
+      <p> © Clemens Haberl, Markus Haberl und Mona Moinipour</p>
 
     </body>
+
+
+
+
