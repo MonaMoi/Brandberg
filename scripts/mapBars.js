@@ -47,20 +47,15 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
       coordsWidget.className = "esri-widget esri-component";
       coordsWidget.style.padding = "7px 15px 5px";
       coordsWidget.style.margin = "7px 10px 47px";
-
       view.ui.add(coordsWidget, "bottom-right");
-        
-        
       function showCoordinates(pt) {
         var coords = "Lat/Lon " + pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) +
             " | Scale 1:" + Math.round(view.scale * 1) / 1;
         coordsWidget.innerHTML = coords;
       }
-        
       view.watch("stationary", function(isStationary) {
         showCoordinates(view.center);
       });
-
       view.on("pointer-move", function(evt) {
         showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
       });
@@ -184,7 +179,49 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
             }]
           }]
         }
-         
+        //45620
+        function getFigureNumberofGorge(){
+          var numberofFiguresinGorge = 0;
+          var numberofFiguresinGorgeTotal = 0;
+          var tempGorge = daten[0].Gorge;
+          var tempNumber = 0;
+          console.log(tempGorge);
+          for (var i = 60; i < daten.length; i++) {
+            
+            if(daten[i].Gorge == tempGorge){
+              tempGorge = daten[i].Gorge;
+              //console.log(tempGorge);
+              if(daten[i].Number_of_Figures != ""){
+                tempNumber = daten[i].Number_of_Figures;
+                tempNumber = parseInt(tempNumber);
+                numberofFiguresinGorge = numberofFiguresinGorge + tempNumber;
+                console.log(tempNumber);
+                //console.log(numberofFiguresinGorge);
+              }
+            }else if(daten[i].Gorge != tempGorge){
+              tempGorge = daten[i].Gorge;
+              numberofFiguresinGorgeTotal = numberofFiguresinGorgeTotal + numberofFiguresinGorge;
+              console.log(numberofFiguresinGorge)
+              numberofFiguresinGorge = 0;
+              if(daten[i].Number_of_Figures != "")
+              tempNumber = daten[i].Number_of_Figures;
+              tempNumber = parseInt(tempNumber);
+              numberofFiguresinGorge = numberofFiguresinGorge + tempNumber;
+              console.log(numberofFiguresinGorgeTotal);
+              console.log(tempGorge);
+              
+                
+              
+              //NumberInPercent = (numberofSitesinGorge * 100) /839;
+              //NumberInPercent = NumberInPercent * 25 + 350;
+              //console.log(NumberInPercent);
+              //getGorgeBars(NumberInPercent, temp);
+              //temp = daten[i].Gorge;
+             // numberofSitesinGorge = 1;
+          }
+        }
+      }
+
         function getSitesNumberofGorge(){
             var numberofSitesinGorge = 0;
             var temp = daten[0].Gorge;
@@ -318,7 +355,8 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
         */
           
       map.add(graphicsLayer);
-      getSitesNumberofGorge()
+     // getSitesNumberofGorge();
+      getFigureNumberofGorge();
     
       
     });

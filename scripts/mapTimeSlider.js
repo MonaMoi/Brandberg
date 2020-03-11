@@ -4,12 +4,11 @@
     require([
         "esri/Map",
         "esri/views/SceneView",
-        "esri/widgets/TimeSlider",
         "esri/layers/GraphicsLayer",
         "esri/Graphic",
         "esri/PopupTemplate"
 
-    ], function(Map, SceneView, GraphicsLayer, TimeSlider, Graphic, PopupTemplate) {
+    ], function(Map, SceneView, GraphicsLayer, Graphic, PopupTemplate) {
 
         var graphicsLayer = new GraphicsLayer();
 
@@ -22,7 +21,7 @@
             container: "viewDiv",
             map: map,
             center: [14.554717, -21.136488],
-            zoom: 11.8,
+            zoom: 11.6,
 
             popup: {
                 dockEnabled: true,
@@ -38,20 +37,15 @@
         coordsWidget.className = "esri-widget esri-component";
         coordsWidget.style.padding = "7px 15px 5px";
         coordsWidget.style.margin = "7px 10px 47px";
-  
         view.ui.add(coordsWidget, "bottom-right");
-          
-          
         function showCoordinates(pt) {
           var coords = "Lat/Lon " + pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) +
               " | Scale 1:" + Math.round(view.scale * 1) / 1;
           coordsWidget.innerHTML = coords;
         }
-          
         view.watch("stationary", function(isStationary) {
           showCoordinates(view.center);
         });
-  
         view.on("pointer-move", function(evt) {
           showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
         }); 
@@ -65,151 +59,249 @@
             },
             size: 5
         };
+        
+        var slider = document.getElementById("slideValue");
+        slider.value = 0;
+        slider.addEventListener("input", function() {
+          var slideValue = document.getElementById("slideValue").value;
+          var year = 1947;
+          var month = 12;
+          for(var i = 0; i < slideValue; i++){
 
-        const timeSlider = new TimeSlider({
-            container: "timeSlider",
-            mode: "time-window",
-            view: view
-          });
-          view.ui.add(timeSlider, "manual");
-
-          view.ui.add("titleDiv", "top-right");
-
-          view.whenLayerView(layer).then(function(lv) {
-            const fullTimeExtent = layer.timeInfo.fullTimeExtent;
-  
-            // set up time slider properties
-            timeSlider.fullTimeExtent = fullTimeExtent;
-            timeSlider.stops = {
-              interval: layer.timeInfo.interval
-            };
-          });
-
-          var PopupTemplate = {
-            title: "Fundstelle {Gorge} ",
-  
-            content: [{
-              type: "fields",
-              fieldInfos: [{
-                fieldName: "Point_Count",
-                visible: false,
-                label: "Count of Points",
-                format: {
-                  places: 0,
-                  digitSeparator: true
-                }
-              }, {
-                fieldName: "relationships/0/Point_Count_COMMON",
-                visible: false,
-                label: "Number of figures",
-                format: {
-                  places: 0,
-                  digitSeparator: true
-                },
-                statisticType: "sum"
-              }, {
-                fieldName: "relationships/0/COMMON",
-                visible: false,
-                label: "Common Name"
-              }, {
-                fieldName: "BLOCKCE10",
-                visible: false,
-                label: "Block"
-              }]
-            }, {
-              type: "text", // TextContentElement
-              text: "{Lat} <br> {Long} <br> Diese Site {Site} liegt in der Gorge {Gorge}."
-            }, {
-              type: "media", // MediaContentElement
-              mediaInfos: [{
-                title: "Felsmalerei",
-                type: "image",
-                caption: "{Discription}{Gorge}{GorgeSesaub}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG1}/zz_additional_data/Photo/preview_1600_{IMG1}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "{Discription}{Gorge}{GorgeSesaub}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG2}/zz_additional_data/Photo/preview_1600_{IMG2}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "{Discription}{Gorge}{GorgeSesaub}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG3}/zz_additional_data/Photo/preview_1600_{IMG3}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "{Discription}{Gorge}{GorgeSesaub}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG4}/zz_additional_data/Photo/preview_1600_{IMG4}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "{Discription}{Gorge}{GorgeSesaub}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG5}/zz_additional_data/Photo/preview_1600_{IMG5}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "{Discription}{Gorge}{GorgeSesaub}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG6}/zz_additional_data/Photo/preview_1600_{IMG6}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "{Discription}{Gorge}{GorgeSesaub}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG7}/zz_additional_data/Photo/preview_1600_{IMG7}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "{Discription}{Gorge}{GorgeSesaub}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG8}/zz_additional_data/Photo/preview_1600_{IMG8}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "{Discription}{Gorge}{GorgeSesaub}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG9}/zz_additional_data/Photo/preview_1600_{IMG9}.png"
-                }
-              }, {
-                title: "Felsmalerei",
-                type: "image",
-                caption: "{Discription}{Gorge}{GorgeSesaub}",
-                value: {
-                  sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG10}/zz_additional_data/Photo/preview_1600_{IMG10}.png"
-                }
-              }]
-            }]
+            if(month == 12){
+              year = year + 1;
+              month = 1;
+            }else{
+              month = month + 1;
+            }
           }
+          document.getElementById('rangeValue').innerHTML= month + ". " + year;
+          
+          getSitesByYearMonth(year, month);
+
+        });
+
+        
+        function getSitesByYearMonth (y, m){
+          clearLayer();
+          var coulor = [226, 119, 40];
+          for (var i = 0; i < daten.length; i++) {
+
+            var discoverer = daten[i].Discoverer;
+            discoverer = discoverer.toLowerCase();
+            discoverer = discoverer.replace(/ /g, '');
+            discoverer = discoverer.replace('/', '');
+            discoverer = discoverer.replace('&', '');
+            
+            
+            switch(discoverer) {
+              case "toiwoshipahu":
+                coulor = [0, 255, 0]; //green
+                break;
+              case "toiwo" || "j.toiwo":
+                coulor = [0, 0, 255]; //blue
+                break;
+              case "toiwolameka":
+                coulor = [226, 119, 40];
+                break;
+              case "shipahu":
+                coulor = [255, 255, 0]; // yellow
+                break;
+              case "shipahupaulus":
+                coulor = [226, 119, 40];
+                break;
+              case "shipahupager":
+                coulor = [226, 119, 40];
+                break;
+              case "s.a.pager":
+                coulor = [226, 119, 40]; // orange
+                break;
+              case "pagermatheus":
+                coulor = [226, 119, 40];
+                break;
+              case "matheus" || "e.matheus":
+                coulor = [226, 119, 40];
+                break; 
+              case "camby" || "camby´srock":
+                coulor = [226, 119, 40];
+                break;
+              case "roth" || "h.roth":
+                coulor = [226, 119, 40];
+                break;
+              case "lempproth":
+                coulor = [226, 119, 40];
+                break;
+              case "lempp" || "h.lempp":
+                coulor = [226, 119, 40];
+                break;
+              case "viereck" || "a.viereck":
+                coulor = [226, 119, 40];
+                break;
+              case "paulus" || "f.paulus":
+                coulor = [226, 119, 40];
+                break;
+              case "clauss" || "clauss-darrer":
+                coulor = [226, 119, 40];
+                break;
+              case "walter" || "j.j.d.walter":
+                coulor = [226, 119, 40];
+                break;
+              case "rudner" || "j.rudner":
+                coulor = [226, 119, 40];
+                break;
+              case "craven" || "dr.craven" || "dr.d.craven":
+                coulor = [226, 119, 40];
+                break;
+              case "jipsen":
+                coulor = [226, 119, 40];
+                break;
+              case "keyenstüber" || "kleyenstüber":
+                coulor = [226, 119, 40];
+                break;
+              case "nashilengo" || "j.nashilongo" || "nashilongo" || "nshilongo":
+                coulor = [226, 119, 40];
+                break;
+              case "kambonde":
+                coulor = [226, 119, 40];
+                break;
+              case "scherze":
+                coulor = [226, 119, 40];
+                break;                                     
+              default:
+              break;
+            }
+            
+            var year, month;
+            year = daten[i].Date_of_Discovery, month = daten[i].Date_of_Discovery;
+            if(year != ""){
+              console.log(year);
+            }
+            year = year.slice(6, 10), month = month.slice(3, 5);
+            year = parseInt(year), month = parseInt(month);
+
+            
+            
+            if(year < y ||  year <= y && month <= m ){
+              addPoint(i, coulor);
+            }
+          }
+        }
+        
+        var PopupTemplate = {
+          title: "Fundstelle {Gorge} ",
+
+          content: [{
+            type: "fields",
+            fieldInfos: [{
+              fieldName: "Point_Count",
+              visible: false,
+              label: "Count of Points",
+              format: {
+                places: 0,
+                digitSeparator: true
+              }
+            }, {
+              fieldName: "relationships/0/Point_Count_COMMON",
+              visible: false,
+              label: "Number of figures",
+              format: {
+                places: 0,
+                digitSeparator: true
+              },
+              statisticType: "sum"
+            }, {
+              fieldName: "relationships/0/COMMON",
+              visible: false,
+              label: "Common Name"
+            }, {
+              fieldName: "BLOCKCE10",
+              visible: false,
+              label: "Block"
+            }]
+          }, {
+            type: "text", // TextContentElement
+            text: "{Lat} <br> {Long} <br> Diese Site {Site} liegt in der Gorge {Gorge}."
+          }, {
+            type: "media", // MediaContentElement
+            mediaInfos: [{
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG1}/zz_additional_data/Photo/preview_1600_{IMG1}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG2}/zz_additional_data/Photo/preview_1600_{IMG2}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG3}/zz_additional_data/Photo/preview_1600_{IMG3}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG4}/zz_additional_data/Photo/preview_1600_{IMG4}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG5}/zz_additional_data/Photo/preview_1600_{IMG5}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG6}/zz_additional_data/Photo/preview_1600_{IMG6}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG7}/zz_additional_data/Photo/preview_1600_{IMG7}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG8}/zz_additional_data/Photo/preview_1600_{IMG8}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG9}/zz_additional_data/Photo/preview_1600_{IMG9}.png"
+              }
+            }, {
+              title: "Felsmalerei",
+              type: "image",
+              caption: "{Discription}{Gorge}{GorgeSesaub}",
+              value: {
+                sourceURL: "http://datenportal.ianus-fdz.de/components/fileBrowser/getPreview.jsp?filePath=/web_derivatives/Brandberg-Daureb-Pager/{Gorge}/{SiteIMG10}/zz_additional_data/Photo/preview_1600_{IMG10}.png"
+              }
+            }]
+          }]
+        }
           
         function clearLayer() {
+          graphicsLayer.removeAll();
+        } 
 
-            graphicsLayer.removeAll();
-        }  
-
-        function getSites() {
-          clearLayer();
-          
-          for (var i = 0; i < daten.length; i++) {
-              addPoint(i);
-            }
-            addPolygon();
-        }
-
-        function addPoint(i) {
+        function addPoint(i, coulor) {
           if(daten[i].Gorge == "Sesaub / Basswaldrinne"){
             var gorgeSesaub = ", für diese Gorge liegen keine Bilddaten vor.";
           }else{
@@ -235,7 +327,7 @@
           
           var simpleMarkerSymbol = {
             type: "simple-marker",
-            color: [226, 119, 40],
+            color: coulor,
             outline: {
                 color: [255, 255, 255], // white
                 width: 1,
@@ -259,119 +351,6 @@
           graphicsLayer.graphics.add(graphic);
         }
 
-        function addPolygon(){
-            var polygon = {
-                type: "polygon", 
-                rings: [
-                  [14.567988, -21.026032],
-                  [14.569655, -21.037139],
-                  [14.575130, -21.070168],
-                  [14.574289, -21.080009],
-                  [14.569478, -21.089399],     
-                  [14.578734, -21.103087],
-                  [14.555399, -21.115577],
-                  [14.572675, -21.126702],
-                  [14.589679, -21.188398],
-                  [14.601220, -21.177878],
-                  [14.657098, -21.143921],
-                  [14.675094, -21.117051],
-                  [14.686745, -21.104411],
-                  [14.671904, -21.068789],
-                  [14.639504, -21.042081],
-                  [14.602096, -21.035809],
-                  [14.567988, -21.026032]
-                ]
-              };
-
-              
-
-
-
-            var fillSymbol = {
-            type: "simple-fill",
-            color: [227, 139, 79, 0.8],
-            outline: {
-                color: [255, 255, 255],
-                width: 1
-            }
-            };
-    
-            var polygonGraphic = new Graphic({
-            geometry: polygon,
-            symbol: fillSymbol
-            });
-
-            graphicsLayer.graphics.add(polygonGraphic);
-        }  
-
-        /*
-        //Die folgenden 25 Zeilen händeln die Funktionen der GorgesMap (checkboxes).
-        var getGorgesLayerToggle = document.getElementsByClassName("box");
-        
-        for(let i = 0; i < getGorgesLayerToggle.length; i++)
-        {
-          getGorgesLayerToggle[i].checked = false;
-        }
-
-        for(let i=0; i < getGorgesLayerToggle.length; i++)
-        {
-          var gorgeID = document.getElementById(i);
-          gorgeID.addEventListener("change", function() {
-            if(getGorgesLayerToggle[i].checked){
-              b = false;
-              getGorges(i);
-            } else{
-              clearLayer();
-              for(let j = 0; j < getGorgesLayerToggle.length; j++){
-                gorgeID = document.getElementById(j);
-                if(gorgeID.checked){
-                  getGorges(j);
-                }
-              }
-            }
-          });
-        }
-        */
-          
       map.add(graphicsLayer);
-      
-    
-      getSites();
-      
     });
 });
-
-
-
-
-
-/*
-*
-*
-*
-  ToDoooo
-  HTML
-    Layout
-    Dropdown
-    Map einbindung
-    Startseite Inhalte
-    Galerie Inhalte
-
-  MAP
-    Animation
-    Layer Interaktion
-      implementieren
-
-      Gorges farbig
-      timebar farbig (Discoverer)
-      Balken
-
-      getAllSites() - search for Site
-
-
-
-    PopUp gestalten - Inhalte
-*
-*
-*
- */

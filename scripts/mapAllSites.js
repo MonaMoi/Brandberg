@@ -229,7 +229,10 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
             }]
           }
 
-          
+        var template = {
+            title: "Undiscovered",
+            content: "Dieser Bereich ist noch nicht erforscht.",
+          };  
           
         function clearLayer() {
 
@@ -331,7 +334,8 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
     
             var polygonGraphic = new Graphic({
             geometry: polygon,
-            symbol: fillSymbol
+            symbol: fillSymbol,
+            popupTemplate: template
             });
 
             graphicsLayer.graphics.add(polygonGraphic);

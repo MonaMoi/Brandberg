@@ -46,6 +46,7 @@
       
       <div id="viewDiv">
       
+      
       <div id="sidebar" class="esri-widget">
         <div id="text">
           <h4>Discoverer</h4>
@@ -78,7 +79,11 @@
         </div>
       </div>
     </div>
-    <div id="timeSlider"></div>
+    <div id="positionSlider">
+      <span>Hier sehen Sie die Sites nach ihrem Entdeckungsdatum (Monat / Jahr)</span>
+      <span id="rangeValue">12. 1947</span>
+      <input class="range" id="slideValue" type="range" name="" value="0" min="0" max="456">
+    </div>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="../scripts/mapTimeSlider.js"></script>
