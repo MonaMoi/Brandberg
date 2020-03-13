@@ -232,7 +232,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
               }else{
                   
                   NumberInPercent = (numberofSitesinGorge * 100) /839;
-                  NumberInPercent = NumberInPercent * 25 + 350;
+                  NumberInPercent = NumberInPercent * 45 + 250;
                   console.log(NumberInPercent);
                   getGorgeBars(NumberInPercent, temp);
                   temp = daten[i].Gorge;

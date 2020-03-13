@@ -98,9 +98,12 @@
               case "toiwoshipahu":
                 coulor = [0, 255, 0]; //green
                 break;
-              case "toiwo" || "jtoiwo":
+              case "toiwo":
                 coulor = [0, 0, 255]; //blue
                 break;
+              case "jtoiwo":
+                coulor = [0, 0, 255]; //blue
+                break;  
               case "toiwolameka":
                 coulor = [226, 119, 40];
                 break;
@@ -119,52 +122,97 @@
               case "pagermatheus":
                 coulor = [226, 119, 40];
                 break;
-              case "matheus" || "ematheus":
+              case "matheus":
                 coulor = [226, 119, 40];
                 break; 
-              case "camby" || "camby´srock":
+              case "ematheus":
+                coulor = [226, 119, 40];
+                break;   
+              case "camby":
                 coulor = [226, 119, 40];
                 break;
-              case "roth" || "hroth":
+              case "camby´srock":
+                coulor = [226, 119, 40];
+                break;  
+              case "roth":
                 coulor = [226, 119, 40];
                 break;
+              case "roth":
+                coulor = [226, 119, 40];
+                break;  
               case "lempproth":
                 coulor = [226, 119, 40];
                 break;
-              case "lempp" || "hlempp":
+              case "lempp":
                 coulor = [226, 119, 40];
                 break;
-              case "viereck" || "aviereck":
+              case "lempp":
+                coulor = [226, 119, 40];
+                break;  
+              case "viereck":
                 coulor = [226, 119, 40];
                 break;
-              case "paulus" || "fpaulus":
+              case "aviereck":
+                coulor = [226, 119, 40];
+                break;  
+              case "paulus":
                 coulor = [226, 119, 40];
                 break;
-              case "clauss" || "clauss-darrer":
+              case "fpaulus":
+                coulor = [226, 119, 40];
+                break;  
+              case "clauss":
                 coulor = [226, 119, 40];
                 break;
-              case "walter" || "jjdwalter":
+                case "clauss":
+                  coulor = [226, 119, 40];
+                  break;  
+              case "walter":
                 coulor = [226, 119, 40];
                 break;
-              case "rudner" || "jrudner":
+              case "jjdwalter":
+                coulor = [226, 119, 40];
+                break;  
+              case "rudner":
                 coulor = [0,0,0];
                 break;
-              case "craven" || "drcraven" || "drdcraven":
+                case "jrudner":
+                  coulor = [0,0,0];
+                  break;  
+              case "craven":
                 coulor = [226, 119, 40];
                 break;
+              case "drcraven":
+                coulor = [226, 119, 40];
+                break;
+              case "drdcraven":
+                coulor = [226, 119, 40];
+                break;    
               case "jipsen":
                 coulor = [226, 119, 40];
                 break;
-              case "keyenstüber" || "kleyenstüber":
+              case "keyenstüber":
                 coulor = [226, 119, 40];
                 break;
-              case "nashilengo" || "jnashilongo" || "nashilongo" || "nshilongo":
+              case "kleyenstüber":
+                coulor = [226, 119, 40];
+                break;  
+              case "nashilengo":
                 coulor = [226, 119, 40];
                 break;
+              case "jnashilongo":
+                coulor = [226, 119, 40];
+                break;
+              case "nashilongo":
+                coulor = [226, 119, 40];
+                break;
+              case "nshilongo":
+                coulor = [226, 119, 40];
+                break;      
               case "kambonde":
                 coulor = [226, 119, 40];
                 break;
-              case "scherze":
+              case "scherz":
                 coulor = [226, 119, 40];
                 break;                                     
               default:
