@@ -96,31 +96,31 @@
             
             switch(discoverer) {
               case "toiwoshipahu":
-                coulor = [0, 255, 0]; //green
+                coulor = [0, 255, 0]; //grün
                 break;
               case "toiwo":
-                coulor = [0, 0, 255]; //blue
+                coulor = [0, 0, 255]; //blau
                 break;
               case "jtoiwo":
-                coulor = [0, 0, 255]; //blue
+                coulor = [0, 0, 255]; // blau
                 break;  
               case "toiwolameka":
-                coulor = [226, 119, 40];
+                coulor = [204, 153, 0]; // gold
                 break;
               case "shipahu":
-                coulor = [255, 255, 0]; // yellow
+                coulor = [255, 255, 0]; // gelb
                 break;
               case "shipahupaulus":
-                coulor = [226, 119, 40];
+                coulor = [136, 119, 23]; // grün-gelb
                 break;
               case "shipahupager":
-                coulor = [226, 119, 40];
+                coulor = [255,255,255]; 
                 break;
               case "sapager":
-                coulor = [226, 119, 40]; // orange
+                coulor = [225, 0, 0]; // rot
                 break;
               case "pagermatheus":
-                coulor = [226, 119, 40];
+                coulor = [226, 119, 40]; 
                 break;
               case "matheus":
                 coulor = [226, 119, 40];
@@ -156,10 +156,10 @@
                 coulor = [226, 119, 40];
                 break;  
               case "paulus":
-                coulor = [226, 119, 40];
+                coulor = [225, 0, 0]; // rot
                 break;
               case "fpaulus":
-                coulor = [226, 119, 40];
+                coulor = [225, 0, 0]; // rot
                 break;  
               case "clauss":
                 coulor = [226, 119, 40];
@@ -174,10 +174,10 @@
                 coulor = [226, 119, 40];
                 break;  
               case "rudner":
-                coulor = [0,0,0];
+                coulor = [0,0,0]; // schwarz
                 break;
                 case "jrudner":
-                  coulor = [0,0,0];
+                  coulor = [0,0,0]; //schwarz
                   break;  
               case "craven":
                 coulor = [226, 119, 40];
