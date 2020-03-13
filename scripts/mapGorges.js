@@ -108,7 +108,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
             }]
           }, {
             type: "text", // TextContentElement
-            text: "{Lat} <br> {Long} <br> Diese Site {Site} liegt in der Gorge {Gorge}."
+            text: "Diese Site {Site} liegt in der Gorge {Gorge}.<br><br> Koordinaten: Latitude {Lat}, Longitude {Long} <br>Spatiality: {Spatiality}<br>Water Availability: {WaterAvailability}<br>Living Place: {LivingPlace}<br>Open Field: {OpenField}<br>Quantity of Artefacts: {QuantityOfArtefacts}"
           }, {
             type: "media", // MediaContentElement
             mediaInfos: [{
@@ -396,6 +396,11 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
           var long = daten[i].Longitude;
           var site = daten[i].Site;
           var gorge = daten[i].Gorge;
+          var spatiality = daten[i].Spatiality;
+          var wateravailability = daten[i].Water_Availability;
+          var livingplace = daten[i].Living_Place;
+          var openfield = daten[i].Open_Field;
+          var quantityofartefacts = daten[i].Quantity_of_Artefacts;
           var siteIMG1 = daten[i].SiteIMG1, siteIMG2 = daten[i].SiteIMG2, siteIMG3 = daten[i].SiteIMG3, siteIMG4 = daten[i].SiteIMG4, siteIMG5 = daten[i].SiteIMG5, siteIMG6 = daten[i].SiteIMG6, siteIMG7 = daten[i].SiteIMG7, siteIMG8 = daten[i].SiteIMG8, siteIMG9 = daten[i].SiteIMG9, siteIMG10 = daten[i].SiteIMG10;
           var img1 = daten[i].Picture_Link_to_gorge1, img2 = daten[i].Picture_Link_to_gorge2, img3 = daten[i].Picture_Link_to_gorge3, img4 = daten[i].Picture_Link_to_gorge4, img5 = daten[i].Picture_Link_to_gorge5, img6 = daten[i].Picture_Link_to_gorge6, img7 = daten[i].Picture_Link_to_gorge7, img8 = daten[i].Picture_Link_to_gorge8, img9 = daten[i].Picture_Link_to_gorge9, img10 = daten[i].Picture_Link_to_gorge10;
           
@@ -404,6 +409,11 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
               Long: long,
               Site: site,
               Gorge: gorge,
+              Spatiality: spatiality,
+              WaterAvailability: wateravailability,
+              LivingPlace: livingplace,
+              OpenField: openfield,
+              QuantityOfArtefacts: quantityofartefacts,
               GorgeSesaub: gorgeSesaub,
               Discription: discription,
               IMG1: img1, IMG2: img2, IMG3: img3, IMG4: img4, IMG5: img5, IMG6: img6, IMG7: img7, IMG8: img8, IMG9: img9, IMG10: img10,

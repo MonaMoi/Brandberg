@@ -71,7 +71,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
       };
 
       var PopupTemplate = {
-        title: "Fundstelle {Gorge} ",
+        title: "Fundstelle {Gorge} ", //ÄNDERN
 
         content: [{
           type: "fields",
@@ -101,7 +101,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function(data
             visible: false,
             label: "Block"
           }]
-        }, {
+        }, { //ÄNDERN
           type: "text", // TextContentElement
           text: "{Lat} <br> {Long} <br> Diese Site {Site} liegt in der Gorge {Gorge}."
         }, {
