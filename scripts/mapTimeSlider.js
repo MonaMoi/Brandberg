@@ -92,13 +92,13 @@
             discoverer = discoverer.replace(/ /g, '');
             discoverer = discoverer.replace('/', '');
             discoverer = discoverer.replace('&', '');
-            
+            discoverer = discoverer.replace('.', '');
             
             switch(discoverer) {
               case "toiwoshipahu":
                 coulor = [0, 255, 0]; //green
                 break;
-              case "toiwo" || "j.toiwo":
+              case "toiwo" || "jtoiwo":
                 coulor = [0, 0, 255]; //blue
                 break;
               case "toiwolameka":
@@ -113,43 +113,43 @@
               case "shipahupager":
                 coulor = [226, 119, 40];
                 break;
-              case "s.a.pager":
+              case "sapager":
                 coulor = [226, 119, 40]; // orange
                 break;
               case "pagermatheus":
                 coulor = [226, 119, 40];
                 break;
-              case "matheus" || "e.matheus":
+              case "matheus" || "ematheus":
                 coulor = [226, 119, 40];
                 break; 
               case "camby" || "camby´srock":
                 coulor = [226, 119, 40];
                 break;
-              case "roth" || "h.roth":
+              case "roth" || "hroth":
                 coulor = [226, 119, 40];
                 break;
               case "lempproth":
                 coulor = [226, 119, 40];
                 break;
-              case "lempp" || "h.lempp":
+              case "lempp" || "hlempp":
                 coulor = [226, 119, 40];
                 break;
-              case "viereck" || "a.viereck":
+              case "viereck" || "aviereck":
                 coulor = [226, 119, 40];
                 break;
-              case "paulus" || "f.paulus":
+              case "paulus" || "fpaulus":
                 coulor = [226, 119, 40];
                 break;
               case "clauss" || "clauss-darrer":
                 coulor = [226, 119, 40];
                 break;
-              case "walter" || "j.j.d.walter":
+              case "walter" || "jjdwalter":
                 coulor = [226, 119, 40];
                 break;
-              case "rudner" || "j.rudner":
-                coulor = [226, 119, 40];
+              case "rudner" || "jrudner":
+                coulor = [0,0,0];
                 break;
-              case "craven" || "dr.craven" || "dr.d.craven":
+              case "craven" || "drcraven" || "drdcraven":
                 coulor = [226, 119, 40];
                 break;
               case "jipsen":
@@ -158,7 +158,7 @@
               case "keyenstüber" || "kleyenstüber":
                 coulor = [226, 119, 40];
                 break;
-              case "nashilengo" || "j.nashilongo" || "nashilongo" || "nshilongo":
+              case "nashilengo" || "jnashilongo" || "nashilongo" || "nshilongo":
                 coulor = [226, 119, 40];
                 break;
               case "kambonde":
