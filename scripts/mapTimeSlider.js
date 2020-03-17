@@ -190,14 +190,14 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
 
         switch (discoverer) {
           case "toiwoshipahu":
-            coulor = [0, 255, 0]; //grün
+            coulor = [144, 238, 144]; // hellgrün
             break;
           case "toiwo":
-            coulor = [0, 0, 255]; //blau
+            coulor = [0, 0, 255]; // blau
             break;
           case "jtoiwo":
             coulor = [0, 0, 255]; // blau
-            break;
+            break;  
           case "toiwolameka":
             coulor = [204, 153, 0]; // gold
             break;
@@ -208,111 +208,93 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
             coulor = [136, 119, 23]; // grün-gelb
             break;
           case "shipahupager":
-            coulor = [255, 255, 255];
+            coulor = [255, 255, 255]; // weiß
             break;
-          case "sa.pager":
-            coulor = [225, 0, 0]; // rot
+          case "sapager":
+            coulor = [05, 105, 105]; // grau
             break;
           case "pagermatheus":
-            coulor = [226, 119, 40];
+            coulor = [255, 105, 180]; // pink
             break;
           case "matheus":
-            coulor = [226, 119, 40];
-            break;
+            coulor = [128, 0, 128]; // lila
+            break; 
           case "ematheus":
-            coulor = [226, 119, 40];
-            break;
-          case "camby":
-            coulor = [225, 0, 0];
-            break;
-          case "camby´srock":
-            coulor = [225, 0, 0];
-            break;
-          case "roth":
-            coulor = [226, 119, 40];
-            break;
-          case "roth":
-            coulor = [226, 119, 40];
-            break;
+            coulor = [128, 0, 128]; // lila
+            break;   
+          case "hroth":
+            coulor = [226, 119, 40]; // orange
+            break;  
           case "lempproth":
-            coulor = [255,255,255];
+            coulor = [210, 105, 30]; // chocolate
             break;
           case "lempp":
-            coulor = [255,255,255];
-            break;
-          case "lempp":
-            coulor = [255,255,255];
+            coulor = [255, 182, 193]; // hellrosa
             break;
           case "viereck":
-            coulor = [226, 119, 40];
+            coulor = [0, 191, 255]; // himmelblau
             break;
           case "aviereck":
-            coulor = [226, 119, 40];
-            break;
+            coulor = [0, 191, 255]; // himmelblau
+            break;  
           case "paulus":
             coulor = [225, 0, 0]; // rot
             break;
           case "fpaulus":
             coulor = [225, 0, 0]; // rot
-            break;
+            break;  
           case "clauss":
-            coulor = [226, 119, 40];
-            break;
-          case "clauss":
-            coulor = [226, 119, 40];
+            coulor = [0, 128, 128]; // blaugrün
             break;
           case "walter":
-            coulor = [226, 119, 40];
-            break;
-          case "jjdwalter":
-            coulor = [226, 119, 40];
-            break;
-          case "rudner":
             coulor = [0, 0, 0]; // schwarz
             break;
-          case "jrudner":
-            coulor = [0, 0, 0]; //schwarz
+          case "jjdwalter":
+            coulor = [0, 0, 0]; // schwarz
+            break;  
+          case "rudner":
+            coulor = [220, 220, 220]; // hellgrau
             break;
+          case "jrudner":
+            coulor = [220, 220, 220]; // hellgrau
+            break;  
           case "craven":
-            coulor = [226, 119, 40];
+            coulor = [128, 0, 0]; // kastanienbraun
             break;
           case "drcraven":
-            coulor = [226, 119, 40];
+            coulor = [128, 0, 0]; // kastanienbraun
             break;
           case "drdcraven":
-            coulor = [226, 119, 40];
-            break;
+            coulor = [128, 0, 0]; // kastanienbraun
+            break;    
           case "jipsen":
-            coulor = [226, 119, 40];
+            coulor = [0, 255, 0]; // grün
             break;
           case "keyenstüber":
-            coulor = [226, 119, 40];
+            coulor = [147, 112, 219]; // helllila
             break;
           case "kleyenstüber":
-            coulor = [226, 119, 40];
-            break;
+            coulor = [147, 112, 219]; // helllila
+            break;  
           case "nashilengo":
-            coulor = [226, 119, 40];
+            coulor = [176, 196, 222]; // hellblau
             break;
           case "jnashilongo":
-            coulor = [226, 119, 40];
+            coulor = [176, 196, 222]; // hellblau
             break;
           case "nashilongo":
-            coulor = [226, 119, 40];
-            break;
-          case "nshilongo":
-            coulor = [226, 119, 40];
+            coulor = [176, 196, 222]; // hellblau
             break;
           case "kambonde":
-            coulor = [226, 119, 40];
+            coulor = [255, 20, 147]; // dunkelpink
             break;
           case "scherz":
-            coulor = [226, 119, 40];
-            break;
+            coulor = [0, 0, 128]; // navy
+            break;                                     
           default:
-            break;
+          break;
         }
-
+        
         var year, month;
         year = daten[i].Date_of_Discovery, month = daten[i].Date_of_Discovery;
 
