@@ -12,6 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="../scripts/popUp.js"></script>
 
         <title>Das Brandberg Projekt</title>
 
@@ -26,15 +27,15 @@
               <a class="nav-link bg-dark active" style="color: white;" href="index.html">Start</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle bg-dark" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white;">Map</a>
+              <a class="nav-link dropdown-toggle bg-dark" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white;">Karte</a>
               <div class="dropdown-menu bg-dark">
-                <a class="dropdown-item" href="mapAllSites.html" style="color: white;">Sites</a>
+                <a class="dropdown-item bg-dark" href="mapAllSites.html" style="color: white;">Alle Sites</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="mapGorges.html" style="color: white;">Gorges</a>
+                <a class="dropdown-item bg-dark" href="mapGorges.html" style="color: white;">Alle Gorges</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="mapBars.html" style="color: white;">Bars</a>      
+                <a class="dropdown-item bg-dark" href="mapBars.html" style="color: white;">Diagramme</a>      
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="mapTimeSlider.html" style="color: white;">Time Slider</a>            
+                <a class="dropdown-item bg-dark" href="mapTimeSlider.html" style="color: white;">Time Slider</a>            
               </div>
             </li>
             <li class="nav-item">
@@ -43,6 +44,20 @@
           </ul>
         </div>  
       </nav>
+
+      <div class='popup'>
+        <div class='cnt223'>
+            <h1>Wichtig</h1>
+            <p>
+                Damit Bilder in dieser Website angezeigt werden können müssen Sie das Datenportal IANUS besuchen.
+                <br>
+                <br>
+                <a href='' class='go'>Hier geht es zur IANUS Seite</a>
+                <br>
+                <a href='' class='close'>Schließen</a>
+            </p>
+        </div>
+    </div>
     
       <div id="parallax-image">
           <div class="row h-100">
