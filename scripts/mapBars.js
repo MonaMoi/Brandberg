@@ -9,6 +9,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
     "esri/PopupTemplate"
 
   ], function (Map, SceneView, GraphicsLayer, Graphic, PopupTemplate) {
+    var numTotal = 0;
 
     var graphicsLayer = new GraphicsLayer();
 
@@ -48,7 +49,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       content: [
         { //ÄNDERN
         type: "text", // TextContentElement
-        text: "{Diagramm}",
+        text: "Die Gorge {Gorge} enthält {NumTotal} {Temp0}"
         }
       ]
     }
@@ -80,26 +81,31 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       var numOfFigTemp = 0;
       var numOfFigTotal = 0;
       var tempGorge = daten[0].Gorge;
+      var tempGorge1;
       var last = "Umuab";
       var NumberInPercent;
 
       for (var i = 0; i < daten.length; i++) {
         if (tempGorge == daten[i].Gorge) {
           tempGorge = daten[i].Gorge;
+          tempGorge1 = tempGorge;
           numOfFigTemp = daten[i].Number_of_Figures;
           numOfFig = numOfFig + numOfFigTemp;
+          
         } else if (tempGorge != daten[i].Gorge) {
           tempGorge = daten[i].Gorge;
           numOfFigTemp = daten[i].Number_of_Figures;
           numOfFigTotal = numOfFig;
           numOfFig = 0;
           if (tempGorge == last) {
-            numOfFigTotal = 3679;
+            numOfFigTotal = 258;
           }
           NumberInPercent = (numOfFigTotal * 100) / 45.620;
           NumberInPercent = NumberInPercent * 0.09 + 300;
           var a = 1;
-          getGorgeBars(NumberInPercent, tempGorge, a);
+
+          numTotal = numOfFigTotal
+          getGorgeBars(NumberInPercent, tempGorge1, numTotal, a);
           numOfFigTotal = 0;
           numOfFig = numOfFigTemp;
         }
@@ -125,14 +131,15 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
           NumberInPercent = (numberofSitesinGorge * 100) / 839;
           NumberInPercent = NumberInPercent * 45 + 250;
           var a = 0;
-          getGorgeBars(NumberInPercent, temp, a);
+          numTotal = numberofSitesinGorge
+          getGorgeBars(NumberInPercent, temp, numTotal, a);
           temp = daten[i].Gorge;
           numberofSitesinGorge = 1;
         }
       }
     }
 
-    function getGorgeBars(NumberInPercent, temp, a) {
+    function getGorgeBars(NumberInPercent, temp, numTotal, a) {
       var numOfSites = NumberInPercent * 10;
       var gorgeBarsCoordinates = [
         14.483873, -21.177530, numOfSites, "Amis",
@@ -153,20 +160,38 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
         14.562196, -21.079732, numOfSites, "Umab",
       ];
 
-      for (var i = 0; i < gorgeBarsCoordinates.length; i++) {
-        if (temp == gorgeBarsCoordinates[i + 3]) {
-          addBar(i, gorgeBarsCoordinates, numOfSites, a);
+      for (var j = 0; j <= gorgeBarsCoordinates.length; j++) {
+        if (temp == gorgeBarsCoordinates[j + 3]) {
+          addBar(j, gorgeBarsCoordinates, numOfSites, numTotal, a);
         }
       }
 
     }
 
-    function addBar(i, gorgeBarsCoordinates, numOfSites, a) {
+    function addBar(j, gorgeBarsCoordinates, numOfSites, numTotal, a) {
+      var temp0;
+      var sum = numTotal;
+      if (a == 0) {
+        temp0 = "Sites";
+      } else if(a == 1) {
+        temp0 = "Einzelfiguren";
+      }
+
+      
+      var gorge = gorgeBarsCoordinates[j + 3];
+      
+
+      var attributes = {
+        Gorge: gorge,
+        Temp0: temp0,
+        NumTotal: numTotal
+        };
+
       var polyline = {
         type: "polyline", // autocasts as new Polyline()
         paths: [
-          [gorgeBarsCoordinates[i], gorgeBarsCoordinates[i + 1], 0],
-          [gorgeBarsCoordinates[i], gorgeBarsCoordinates[i + 1], numOfSites]
+          [gorgeBarsCoordinates[j], gorgeBarsCoordinates[j + 1], 0],
+          [gorgeBarsCoordinates[j], gorgeBarsCoordinates[j + 1], numOfSites]
         ]
       };
 
@@ -188,27 +213,11 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
 
       var point = {
         type: "point", // autocasts as new Point()
-        x: gorgeBarsCoordinates[i],
-        y: gorgeBarsCoordinates[i + 1],
+        x: gorgeBarsCoordinates[j],
+        y: gorgeBarsCoordinates[j + 1],
         z: numOfSites + 10
       };
-      var diagramm = a;
-      if (diagramm == 0) {
-        diagramm = "Diese {Gorge} enthält {SiteNum} Sites";
-      } else if(diagramm == 1) {
-        diagramm = "Diese {Gorge} enthält {FiguresNum} Einzelfiguren";
-      }
-
       
-      var gorge = daten[i].Gorge;
-      
-console.log(gorge);
-console.log(diagramm);
-      var attributes = {
-        Gorge: gorge,
-        Diagramm : diagramm
-        };
-
       markerSymbol = {
         type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
         color: [226, 119, 40],
