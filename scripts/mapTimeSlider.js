@@ -33,39 +33,34 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
     });
 
     var PopupTemplate = {
-      title: "Fundstelle {Gorge} ",
-
+      title: "Fundstelle {Site} ",
       content: [{
         type: "fields",
-        fieldInfos: [{
-          fieldName: "Point_Count",
-          visible: false,
-          label: "Count of Points",
-          format: {
-            places: 0,
-            digitSeparator: true
-          }
-        }, {
-          fieldName: "relationships/0/Point_Count_COMMON",
-          visible: false,
-          label: "Number of figures",
-          format: {
-            places: 0,
-            digitSeparator: true
-          },
-          statisticType: "sum"
-        }, {
-          fieldName: "relationships/0/COMMON",
-          visible: false,
-          label: "Common Name"
-        }, {
-          fieldName: "BLOCKCE10",
-          visible: false,
-          label: "Block"
-        }]
+        fieldInfos: [
+        {
+          fieldName: "Lat",
+          visible: true,
+          label: "Latitude",
+        },
+        {
+          fieldName: "Long",
+          visible: true,
+          label: "Longitude",
+        },
+        {
+          fieldName: "Discoverer",
+          visible: true,
+          label: "Discoverer"
+        },
+        {
+          fieldName: "DateDiscovery",
+          visible: true,
+          label: "Date of Discovery"
+        }
+      ]
       }, {
         type: "text", // TextContentElement
-        text: "Diese Site {Site} liegt in der Gorge {Gorge}.<br><br> Koordinaten: Latitude {Lat}, Longitude {Long} <br><br>Discoverer: {Discoverer}<br>Date of Discovery: {DateDiscovery}"
+        text: "Diese Site {Site} liegt in der Gorge {Gorge}."
       }, {
         type: "media", // MediaContentElement
         mediaInfos: [{

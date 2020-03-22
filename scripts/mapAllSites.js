@@ -47,29 +47,46 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
 
       content: [{
         type: "fields",
-        fieldInfos: [{
-          fieldName: "Point_Count",
-          visible: false,
-          label: "Count of Points",
-          
-        }, {
-          fieldName: "relationships/0/Point_Count_COMMON",
+        fieldInfos: [
+        {
+          fieldName: "Lat",
           visible: true,
-          label: "Number of figures",
-          
-          
-        }, {
-          fieldName: "relationships/0/COMMON",
+          label: "Latitude",
+        },
+        {
+          fieldName: "Long",
           visible: true,
-          label: "Common Name"
-        }, {
-          fieldName: "BLOCKCE10",
+          label: "Longitude",
+        },
+        {
+          fieldName: "Spatiality",
           visible: true,
-          label: "Block"
-        }]
+          label: "Spatiality"
+        },
+        {
+          fieldName: "WaterAvailability",
+          visible: true,
+          label: "Water Availability"
+        },
+        {
+          fieldName: "LivingPlace",
+          visible: true,
+          label: "Living Place"
+        },
+        {
+          fieldName: "OpenField",
+          visible: true,
+          label: "Open Field"
+        },
+        {
+          fieldName: "QuantityOfArtefacts",
+          visible: true,
+          label: "Quantity of Artefacts"
+        }
+      ]
       }, {
         type: "text", // TextContentElement
-        text: "Diese Site {Site} liegt in der Gorge {Gorge}.<br><br> Koordinaten: Latitude {Lat}, Longitude {Long} <br>Spatiality: {Spatiality}<br>Water Availability: {WaterAvailability}<br>Living Place: {LivingPlace}<br>Open Field: {OpenField}<br>Quantity of Artefacts: {QuantityOfArtefacts}"
+        text: "Diese Site {Site} liegt in der Gorge {Gorge}."
       }, {
         type: "media", // MediaContentElement
         mediaInfos: [{
