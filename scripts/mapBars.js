@@ -18,6 +18,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       ground: "world-elevation"
     });
 
+    //Da hier ein anderer Blickwinkel für die Ansicht auf die Karte gebraucht wird, ist Dieser unter dem "position" festgelegt.
     var view = new SceneView({
       container: "viewDiv",
       map: map,
@@ -47,8 +48,8 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       title: "Gorge {Gorge} ",
 
       content: [
-        { //ÄNDERN
-        type: "text", // TextContentElement
+        {
+        type: "text",
         text: "Die Gorge {Gorge} enthält {NumTotal} {Temp0}"
         }
       ]
@@ -76,6 +77,9 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       graphicsLayer.removeAll();
     }
 
+    //Die Funktion sucht in der Datenbank unter den Punkt "Number_of_Figures" nach der Anzahl der Motive in einer Site.
+    //Dieser werden addiert in Prozent umgerechnet und mit einem Faktor Multipliziert, damit eine ästhetische Ansicht auf der Karte möglich ist.
+    //für jede Gorge werden der Wert, Name der Gorge, tatsächliche Anzahl an Motive der GOrge und eine Statusvariable als Parameter weitergegeben.
     function getFigureNumberofGorge() {
       var numOfFig = 0;
       var numOfFigTemp = 0;
@@ -117,6 +121,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
 
     }
 
+    //Funktioniert ähnlich wie getFigureNumberofGorge(), allerdings wird hier die Anzahl der Sites in einer Gorge ermittelt.
     function getSitesNumberofGorge() {
       var numberofSitesinGorge = 0;
       var temp = daten[0].Gorge;
@@ -139,6 +144,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       }
     }
 
+    //Es werden die zuvor ermittelten Werte mit Koordinaten der einzelnen Gorges kombiniert und der addBar() wird für jede Gorge ausgeführt.
     function getGorgeBars(NumberInPercent, temp, numTotal, a) {
       var numOfSites = NumberInPercent * 10;
       var gorgeBarsCoordinates = [
@@ -168,6 +174,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
 
     }
 
+    //addBar() funktioniert so wie addPoint() nur werden hier Balken und Punkte definiert und dem Layer hinzugefügt.
     function addBar(j, gorgeBarsCoordinates, numOfSites, numTotal, a) {
       var temp0;
       var sum = numTotal;
@@ -177,18 +184,16 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
         temp0 = "Einzelfiguren";
       }
 
-      
       var gorge = gorgeBarsCoordinates[j + 3];
       
-
       var attributes = {
         Gorge: gorge,
         Temp0: temp0,
         NumTotal: numTotal
-        };
+      };
 
       var polyline = {
-        type: "polyline", // autocasts as new Polyline()
+        type: "polyline",
         paths: [
           [gorgeBarsCoordinates[j], gorgeBarsCoordinates[j + 1], 0],
           [gorgeBarsCoordinates[j], gorgeBarsCoordinates[j + 1], numOfSites]
@@ -196,7 +201,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       };
 
       lineSymbol = {
-        type: "simple-line", // autocasts as SimpleLineSymbol()
+        type: "simple-line",
         color: [226, 119, 40],
         width: 4
       };
@@ -208,7 +213,6 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
         popupTemplate: PopupTemplate
       });
 
-
       graphicsLayer.graphics.add(polylineGraphic);
 
       var point = {
@@ -219,10 +223,9 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       };
       
       markerSymbol = {
-        type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+        type: "simple-marker",
         color: [226, 119, 40],
         outline: {
-          // autocasts as new SimpleLineSymbol()
           color: [255, 255, 255],
           width: 2
         }
@@ -238,6 +241,8 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       graphicsLayer.graphics.add(pointGraphic);
     }
 
+    //Die folgenden 20 Zeilen verwalten den Status der Radiobutton,
+    //woraufhin dann entwerder die Fuktion getSitesNumberofGorge() oder getFigureNumberofGorge() ausführt wird.
     var getGorgesLayerToggle = document.getElementsByClassName("box");
     getGorgesLayerToggle[0].checked = true;
     getGorgesLayerToggle[1].checked = false;

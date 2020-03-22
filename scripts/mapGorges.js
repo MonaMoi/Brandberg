@@ -147,7 +147,6 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       unit: "dual" // The scale bar displays both metric and non-metric units.
     });
 
-
     view.ui.add(scaleBar, {
       position: "top-left"
     });
@@ -175,6 +174,9 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       graphicsLayer.removeAll();
     }
 
+    //Jenachdem welche Eingabe die User gewählt haben, wird "coulor" per SwitchCase eine Farbe zugewiesen.
+    //Danach wird führ jeden passenden Punkt, welcher in der Datenbank gesucht wurde, die funktion addPoint ausgeführt.
+    //Ihr werden die stelle des Punktes in der Datenbank sowie die Farbe als Parameter mitgegeben.
     function getGorges(a) {
       var coulor;
       switch (a) {
@@ -320,13 +322,11 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       graphicsLayer.graphics.add(graphic);
     }
 
-    //Die folgenden 25 Zeilen händeln die Funktionen der GorgesMap (checkboxes).
+    //Die folgenden 21 Zeilen händeln die Funktionen der GorgesMap (checkboxes).
     var getGorgesLayerToggle = document.getElementsByClassName("box");
-
     for (let i = 0; i < getGorgesLayerToggle.length; i++) {
       getGorgesLayerToggle[i].checked = false;
     }
-
     for (let i = 0; i < getGorgesLayerToggle.length; i++) {
       var gorgeID = document.getElementById(i);
       gorgeID.addEventListener("change", function () {

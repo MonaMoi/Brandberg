@@ -20,7 +20,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
     var view = new SceneView({
       container: "viewDiv",
       map: map,
-      center: [14.554717, -21.136488],
+      center: [14.551019, -21.161243],
       zoom: 11.6,
 
       popup: {
@@ -149,7 +149,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
     coordsWidget.style.margin = "7px 10px 47px";
     view.ui.add(coordsWidget, "bottom-right");
     function showCoordinates(pt) {
-      var coords = "Lat/Lon " + pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) +
+      var coords = "Lat/Lon " + pt.latitude.toFixed(6) + " " + pt.longitude.toFixed(6) +
         " | Scale 1:" + Math.round(view.scale * 1) / 1;
       coordsWidget.innerHTML = coords;
     }
@@ -160,6 +160,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
     });
 
+    //Der ausgewählte Wert des Sliders wird ermittelt und daraus Monat und Jahr berechnet.
     var slider = document.getElementById("slideValue");
     slider.value = 0;
     slider.addEventListener("input", function () {
@@ -178,6 +179,9 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       getSitesByYearMonth(year, month);
     });
 
+    //Die zuvor berechneten Zahlen für Monat und Jahr werden mit den Informationen zu Entdeckung der Fundestellen in unserer Datenbank verglichen.
+    //Alle Punkte, die zeitlich vor oder auf dem ausgewählten Datum liegen werden dem Layer hinzugefügt.
+    //Außerdem werden den verschiedenen Entdeckern Farben zugewiesen.
     function getSitesByYearMonth(y, m) {
       clearLayer();
       var coulor = [226, 119, 40];
@@ -294,7 +298,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
           default:
           break;
         }
-        
+
         var year, month;
         year = daten[i].Date_of_Discovery, month = daten[i].Date_of_Discovery;
 

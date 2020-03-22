@@ -1,24 +1,30 @@
-
-
+//GetJSON() braucht mindestens einen lokalen Server.
+//Hier wird die JSON Datei in eine Variable geladen.
+//Die Funktion umfasst die folgende Funktione, damit Diese auf "daten" zugreifen kann.
 $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (data) {
   var daten = data;
 
+  //Startende Esri Funktion.
+  //Sie umfasst alle weiteren Funktionen.
+  //Hier werden sowohl Karte als auch Layer erstellt und befüllt.
   require([
     "esri/Map",
     "esri/views/SceneView",
     "esri/layers/GraphicsLayer",
     "esri/Graphic",
     "esri/PopupTemplate"
-
   ], function (Map, SceneView, GraphicsLayer, Graphic, PopupTemplate) {
 
+    //Layer wird erstellt, er enthält später alle Punkte, Linien oder Polygone, welche gezeigt werden sollen.
     var graphicsLayer = new GraphicsLayer();
 
+    //Neue Map(Karte) wird definiert.
     var map = new Map({
       basemap: "hybrid",
       ground: "world-elevation"
     });
 
+    //View wird erstellt. Das ist der Blickwinkel aus dem die Rezipienten auf die Karte schauen.
     var view = new SceneView({
       container: "viewDiv",
       map: map,
@@ -34,6 +40,8 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       }
     });
 
+    //Das Javascript Objekt PopupTemplate wird hier mit Informationen bestückt.
+    //Es wird später "graphic" mitgegeben damit es auf der Karte als Popup angezeigt werden kann.
     var PopupTemplate = {
       title: "Fundstelle {Site} ",
 
@@ -43,26 +51,20 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
           fieldName: "Point_Count",
           visible: false,
           label: "Count of Points",
-          format: {
-            places: 0,
-            digitSeparator: true
-          }
+          
         }, {
           fieldName: "relationships/0/Point_Count_COMMON",
-          visible: false,
+          visible: true,
           label: "Number of figures",
-          format: {
-            places: 0,
-            digitSeparator: true
-          },
-          statisticType: "sum"
+          
+          
         }, {
           fieldName: "relationships/0/COMMON",
-          visible: false,
+          visible: true,
           label: "Common Name"
         }, {
           fieldName: "BLOCKCE10",
-          visible: false,
+          visible: true,
           label: "Block"
         }]
       }, {
@@ -144,11 +146,16 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       }]
     }
 
+    //ein zweites Template für das Polygon in mapAllSites.html
     var template = {
       title: "Undiscovered",
       content: "Dieser Bereich ist noch nicht erforscht.",
     };
 
+    //Die nächsten 17 Zeilen beschreiben die Erstellung und das Hinzufügen eines Widgets zur Map.
+    //Es ist ein Koordinaten Widget und zegt immer die aktuellen Koordinaten der Mauszeigerposition an.
+    //Es wurde fast unveränder von der ArcGIS Seite übernommen.
+    //https://developers.arcgis.com/javascript/latest/guide/get-map-coordinates/
     var coordsWidget = document.createElement("div");
     coordsWidget.id = "coordsWidget";
     coordsWidget.className = "esri-widget esri-component";
@@ -167,7 +174,11 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
     });
 
-
+    //Die folgenden 11 Zeilen verwalten den Checkbox Status auf der Seite mappAllSites.html
+    //Wenn die Seite geladen wurde ist der Haken gesetzt und alle Sites werden angezeigt.
+    //Außerdem wird das Suchfeld geleert.
+    //Wird der Status verändert werden die Sites nicht mehr angezeigt oder wieder angezeitgt.
+    //Das Suchfeld wird ebensfalls geleert, wenn der Haken gesetzt wird.
     document.getElementById("search").value = "";
     var getSitesLayerToggle = document.getElementById("0");
     getSitesLayerToggle.checked = true;
@@ -180,16 +191,22 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       }
     });
 
+    //Wenn die Taste "Enter" gedrückt wird, wird die Funktion searchForSite() ausgeführt.
+    //Wir verwenden Hier JQuery, da so leichter die HTML elemente angesteuert und mit Funktionen belegt werden können.
     $("#search").keydown(function (e) {
       if (e.keyCode == 13) {
         searchForSite();
       }
     });
 
+    //Wenn der Button neben dem Suchfeld angeklickt wird, wird die Funktion searchForSite() ausgeführt.
     $('#button1').click(function () {
       searchForSite();
     });
 
+    //Die Eingabe des Users wird abgefragt. Es werden Leerstellen entfernt und Die Buchstaben in kleine umgewandelt.
+    //Für jeden String aus der unserer Datenbank unter dem Punkt "Gorge" oder "Site" wird das gleiche gemacht um mögliche Fehler zu vermeiden.
+    //Stimmt die eingebae des Users mit einer gesuchten Site oder Gorge wird der Layer geleert und nur das Gesuchte Ergebnis angezeigt.
     function searchForSite() {
       var input = document.getElementById("search").value;
       var site;
@@ -221,11 +238,13 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       }
     }
 
+    //Leert den Layer
     function clearLayer() {
 
       graphicsLayer.removeAll();
     }
 
+    //Läuft per for Schleife durch die Datenbank. Für jeden Eintrag wird addPoint() und am Ende addPolygon() ausgeführt.
     function getSites() {
       clearLayer();
 
@@ -235,6 +254,11 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       addPolygon();
     }
 
+    //zunächst werden Variablen mit Informationen aus der DatenbNk belegt.
+    //Die Attribute für das PopUp werden gesetzt.
+    //simplemarkerSymbol, point und graphic werden erstellt.
+    //simplemarkerSymbol beschreibt das aussehen der Graphic, point ist der Typ, bestimmt also die Form und enthält die Koordinaten.
+    //graphic ist das Objekt welches dem Layer hinzugefügt wird. es enthält point, simpleMarkerSymbol, attributesund das PopupTemplate.
     function addPoint(i) {
       if (daten[i].Gorge == "Sesaub / Basswaldrinne") {
         var gorgeSesaub = ", für diese Gorge liegen keine Bilddaten vor.";
@@ -273,7 +297,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
         type: "simple-marker",
         color: [226, 119, 40],
         outline: {
-          color: [255, 255, 255], // white
+          color: [255, 255, 255],
           width: 1,
         },
         size: 5
@@ -295,6 +319,7 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       graphicsLayer.graphics.add(graphic);
     }
 
+    //Fügt das Polygon zum Layer hinzu.
     function addPolygon() {
       var polygon = {
         type: "polygon",
@@ -338,9 +363,10 @@ $.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (dat
       graphicsLayer.graphics.add(polygonGraphic);
     }
 
+    //fügt den Layer zu Map hinzu.
     map.add(graphicsLayer);
 
+    //getSites() wird beim Laden der HTML Seite augeführt, da direkt alle Sites angezeigt werden sollen.
     getSites();
-
   });
 });
