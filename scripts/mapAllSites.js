@@ -1,7 +1,7 @@
 //GetJSON() braucht mindestens einen lokalen Server.
 //Hier wird die JSON Datei in eine Variable geladen.
 //Die Funktion umfasst die folgende Funktione, damit Diese auf "daten" zugreifen kann.
-$.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (data) {
+$.getJSON('../database/json/datenBank.json', function (data) {
   var daten = data;
 
   //Startende Esri Funktion.

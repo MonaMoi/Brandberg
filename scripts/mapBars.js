@@ -1,4 +1,4 @@
-$.getJSON('../database/json/TabelleMitCoordinatesUndBildern.json', function (data) {
+$.getJSON('../database/json/datenBank.json', function (data) {
   var daten = data;
 
   require([
